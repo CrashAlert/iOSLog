@@ -16,6 +16,7 @@
 		26B6CED91C34225C00B04C89 /* iOSLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6CED81C34225C00B04C89 /* iOSLogUITests.swift */; };
 		26E5B0611C3424C800BF7C7F /* MotionLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B0601C3424C800BF7C7F /* MotionLogger.swift */; };
 		26E5B0631C34260B00BF7C7F /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E5B0621C34260B00BF7C7F /* CoreMotion.framework */; };
+		26E5B0651C344DD400BF7C7F /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B0641C344DD400BF7C7F /* SensorData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		26B6CEDA1C34225C00B04C89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26E5B0601C3424C800BF7C7F /* MotionLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionLogger.swift; sourceTree = "<group>"; };
 		26E5B0621C34260B00BF7C7F /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		26E5B0641C344DD400BF7C7F /* SensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				26B6CEBF1C34225C00B04C89 /* Assets.xcassets */,
 				26B6CEC11C34225C00B04C89 /* LaunchScreen.storyboard */,
 				26B6CEC41C34225C00B04C89 /* Info.plist */,
+				26E5B0641C344DD400BF7C7F /* SensorData.swift */,
 			);
 			path = iOSLog;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				26B6CEBB1C34225C00B04C89 /* ViewController.swift in Sources */,
 				26B6CEB91C34225C00B04C89 /* AppDelegate.swift in Sources */,
 				26E5B0611C3424C800BF7C7F /* MotionLogger.swift in Sources */,
+				26E5B0651C344DD400BF7C7F /* SensorData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
