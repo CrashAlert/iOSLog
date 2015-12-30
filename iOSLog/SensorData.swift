@@ -63,5 +63,4 @@ class SensorData {
                 + "\(self.accelerationToString())"
                 + "\(self.gyroToString())"
     }
-    
 }
