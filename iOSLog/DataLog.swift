@@ -16,6 +16,6 @@ class DataLog {
      * Write SensorData into Buffer File
      */
     func addSensorData(sensorData: SensorData) {
-        NSLog(sensorData.toString())
+        print(sensorData)
     }
 }

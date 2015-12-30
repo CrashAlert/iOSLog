@@ -11,7 +11,7 @@ import CoreMotion
 import CoreLocation
 
 
-class SensorData {
+class SensorData: CustomStringConvertible {
     let timestamp: NSTimeInterval
     
     let acceleration: CMAcceleration?
@@ -20,6 +20,10 @@ class SensorData {
     let magneticField: CMMagneticField?
     // TODO: magnetometer
     // TODO: pressure on iphone 6
+    
+    var description: String {
+        return "SensorData(" + ")"
+    }
     
     init(
         timestamp: NSTimeInterval = NSDate().timeIntervalSince1970 * 1000,
@@ -137,5 +141,4 @@ class SensorData {
             self.pressureToString()
         ].joinWithSeparator(",")
     }
-    
 }
