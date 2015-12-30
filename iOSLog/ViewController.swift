@@ -28,25 +28,27 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
 
     @IBAction func sendMail(sender: AnyObject) {
         if( MFMailComposeViewController.canSendMail() ) {
-            
+            print(DataLog.sharedInstance.logs.count)
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
 
             //Get time
             let date = NSDate()
             let formatter = NSDateFormatter()
-            formatter.dateFormat = "dd/MM/yyyy @HH:mm"
+            formatter.dateFormat = "dd/MM/yyyy@HH:mm"
             let dateString = formatter.stringFromDate(date)
             
-            //Set the subject and message of the email
+            //Set the subject of the email
             mailComposer.setSubject("[\(dateString)] Test drive")
-//            mailComposer.setMessageBody("This is what they sound like.", isHTML: false)
             
-            let data = DataLog.sharedInstance.logData()
+            let data = DataLog.sharedInstance.csvData()
             mailComposer.addAttachmentData(data, mimeType: "text/csv", fileName: "\(Int(NSDate().timeIntervalSince1970)).csv")
             
             self.presentViewController(mailComposer, animated: true, completion: nil)
         }
     }
 
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
