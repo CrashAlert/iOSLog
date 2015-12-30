@@ -12,32 +12,32 @@ import CoreLocation
 
 
 class SensorData {
-    let timestamp: NSDate
+    let timestamp: NSTimeInterval
     
     let acceleration: CMAcceleration?
     let rotationRate: CMRotationRate?
     let location: CLLocation?
+    let magneticField: CMMagneticField?
     // TODO: magnetometer
-    // TODO: GPS
-    // TODO: course
-    // TODO: alt
-    // TODO: GPS error
+    // TODO: pressure on iphone 6
     
     init(
-        timestamp: NSDate = NSDate(),
+        timestamp: NSTimeInterval = NSDate().timeIntervalSince1970 * 1000,
         acceleration: CMAcceleration? = nil,
         rotationRate: CMRotationRate? = nil,
-        location: CLLocation? = nil
+        location: CLLocation? = nil,
+        magneticField: CMMagneticField? = nil
         )
     {
         self.timestamp = timestamp
         self.acceleration = acceleration
         self.rotationRate = rotationRate
         self.location = location
+        self.magneticField = magneticField
     }
     
     func timestampToString() -> String {
-        return String(timestamp.timeIntervalSince1970 * 1000)
+        return String(timestamp)
     }
     
     func accelerationToString() -> String {
@@ -80,7 +80,15 @@ class SensorData {
         // x
         // y
         // z
-        return ",,"
+        if let mag = self.magneticField {
+            let strX = String(format: "%.10f", mag.x)
+            let strY = String(format: "%.10f", mag.y)
+            let strZ = String(format: "%.10f", mag.z)
+            
+            return "\(strX),\(strY),\(strZ)"
+        } else {
+            return ",,"
+        }
     }
     
     func GPSToString() -> String {
