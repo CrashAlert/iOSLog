@@ -12,6 +12,39 @@ import CoreLocation
 
 
 class SensorData: CustomStringConvertible {
+    static func header() -> String {
+        return [
+            "unix_time",
+            "acc_x",
+            "acc_y",
+            "acc_z",
+            "gyr_x",
+            "gyr_y",
+            "gyr_z",
+            "rot_x",
+            "rot_y",
+            "rot_z",
+            "mag_x",
+            "mag_y",
+            "mag_z",
+            "lat",
+            "lng",
+            "bearing",
+            "speed",
+            "alt",
+            "err_lat",
+            "err_lng",
+            "pressure",
+            "station",
+            "run",
+            "walk",
+            "auto",
+            "cycling",
+            "unknown"
+        ].joinWithSeparator(",")
+    }
+    
+    
     let timestamp: NSTimeInterval
     
     let acceleration: CMAcceleration?
@@ -19,11 +52,10 @@ class SensorData: CustomStringConvertible {
     let location: CLLocation?
     let magneticField: CMMagneticField?
     let motionActivity: CMMotionActivity?
-    // TODO: magnetometer
     // TODO: pressure on iphone 6
     
     var description: String {
-        return "SensorData(" + ")"
+        return "SensorData(" /* TODO: implement printable info */ + ")"
     }
     
     init(
@@ -168,7 +200,4 @@ class SensorData: CustomStringConvertible {
         ].joinWithSeparator(",")
     }
     
-    static func header() -> String {
-        return "unix_time,acc_x,acc_y,acc_z,gyr_x,gyr_y,gyr_z,rot_x,rot_y,rot_z,mag_x,mag_y,mag_z,lat,lng,bearing,speed,alt,err_lat,err_lng,pressure,station,run,walk,auto,cycling,unknown\n"
-    }
 }

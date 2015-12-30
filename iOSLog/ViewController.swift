@@ -6,10 +6,10 @@
 //  Copyright © 2015 Sven Mischkewitz. All rights reserved.
 //
 
-
 import UIKit
 import MessageUI
 import Foundation
+
 
 class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate {
 
@@ -35,13 +35,13 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
 
-            //Get time
+            // Get time
             let date = NSDate()
             let formatter = NSDateFormatter()
             formatter.dateFormat = "dd/MM/yyyy@HH:mm"
             let dateString = formatter.stringFromDate(date)
             
-            //Set the subject of the email
+            // Set the subject of the email
             mailComposer.setSubject("[\(dateString)] Test drive")
             
             let data = DataLog.sharedInstance.csvData()
