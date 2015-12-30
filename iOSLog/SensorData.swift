@@ -11,22 +11,28 @@ import CoreMotion
 import CoreLocation
 
 
-class SensorData {
+class SensorData: CustomStringConvertible {
     let timestamp: NSTimeInterval
     
     let acceleration: CMAcceleration?
     let rotationRate: CMRotationRate?
     let location: CLLocation?
     let magneticField: CMMagneticField?
+    let motionActivity: CMMotionActivity?
     // TODO: magnetometer
     // TODO: pressure on iphone 6
+    
+    var description: String {
+        return "SensorData(" + ")"
+    }
     
     init(
         timestamp: NSTimeInterval = NSDate().timeIntervalSince1970 * 1000,
         acceleration: CMAcceleration? = nil,
         rotationRate: CMRotationRate? = nil,
         location: CLLocation? = nil,
-        magneticField: CMMagneticField? = nil
+        magneticField: CMMagneticField? = nil,
+        motionActivity: CMMotionActivity? = nil
         )
     {
         self.timestamp = timestamp
@@ -34,6 +40,7 @@ class SensorData {
         self.rotationRate = rotationRate
         self.location = location
         self.magneticField = magneticField
+        self.motionActivity = motionActivity
     }
     
     func timestampToString() -> String {
@@ -125,6 +132,28 @@ class SensorData {
         return ""
     }
     
+    func motionActivityToString() -> String {
+        if let act = motionActivity {
+            let stationary = act.stationary ? "1" : "0"
+            let running = act.running ? "1" : "0"
+            let walking = act.walking ? "1" : "0"
+            let automotive = act.automotive ? "1" : "0"
+            let cycling = act.cycling ? "1" : "0"
+            let unknown = act.unknown ? "1" : "0"
+            
+            return [
+                stationary,
+                running,
+                walking,
+                automotive,
+                cycling,
+                unknown
+            ].joinWithSeparator(",")
+        } else {
+            return ",,,,,"
+        }
+    }
+    
     func toString() -> String {
         return [
             self.timestampToString(),
@@ -134,7 +163,8 @@ class SensorData {
             self.rotationToString(),
             self.magnetometerToString(),
             self.GPSToString(),
-            self.pressureToString()
+            self.pressureToString(),
+            self.motionActivityToString()
         ].joinWithSeparator(",")
     }
     

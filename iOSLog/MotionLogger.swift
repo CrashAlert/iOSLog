@@ -27,6 +27,9 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     let locationManager = CLLocationManager()
     let locationAccuracy = kCLLocationAccuracyBest
     
+    // Motion Activity Manager
+    let activityManager = CMMotionActivityManager()
+    
     override init() {
         super.init()
         
@@ -48,6 +51,7 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         self.startGyroLog()
         self.startGPSLog()
         self.startMagnetometerLog()
+        self.startMotionActivityLog()
     }
     
     func startAccelerationLog() {
@@ -58,7 +62,6 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
             return
         }
         
-        motionManager.startAccelerometerUpdates()
         motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.currentQueue()!) {
             (accelerometerData: CMAccelerometerData?, NSError) -> Void in
             self.logAccelerationData(accelerometerData!)
@@ -119,13 +122,26 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
             return
         }
         
-        motionManager.startMagnetometerUpdates()
         motionManager.startMagnetometerUpdatesToQueue(NSOperationQueue.currentQueue()!) {
             (magnetometerData: CMMagnetometerData?, NSError) -> Void in
             self.logMagnetometerData(magnetometerData!)
             if (NSError != nil) {
                 print("\(NSError)")
             }
+        }
+    }
+    
+    func startMotionActivityLog() {
+        NSLog("Start Motion Activity Log")
+        
+        if (!CMMotionActivityManager.isActivityAvailable()) {
+            NSLog("Activity Manager not available!")
+            return
+        }
+        
+        activityManager.startActivityUpdatesToQueue(NSOperationQueue.currentQueue()!) {
+            (activityData: CMMotionActivity?) -> Void in
+            self.logMotionActivity(activityData!)
         }
     }
     
@@ -141,6 +157,11 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     
     func logMagnetometerData(data: CMMagnetometerData) {
         let sensorData = SensorData(timestamp: data.timestamp, magneticField: data.magneticField)
+        DataLog.sharedInstance.addSensorData(sensorData)
+    }
+    
+    func logMotionActivity(data: CMMotionActivity) {
+        let sensorData = SensorData(timestamp: data.timestamp, motionActivity: data)
         DataLog.sharedInstance.addSensorData(sensorData)
     }
     
@@ -160,10 +181,15 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         motionManager.stopMagnetometerUpdates()
     }
     
+    func stopMotionActivityLog() {
+        activityManager.stopActivityUpdates()
+    }
+    
     func stop() {
         self.stopAccelerationLog()
         self.stopGyroLog()
         self.stopGPSLog()
         self.stopMagnetometerLog()
+        self.stopMotionActivityLog()
     }
 }
