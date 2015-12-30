@@ -68,7 +68,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
             let dateName = formatterForName.stringFromDate(date)
             
             let data = DataLog.sharedInstance.csvData()
-            mailComposer.addAttachmentData(data, mimeType: "text/csv", fileName: "\(dateName)-\(name).csv")
+            mailComposer.addAttachmentData(data, mimeType: "text/csv", fileName: "\(dateName)-\(name)-ios.csv")
             
             self.presentViewController(mailComposer, animated: true, completion: nil)
         }
