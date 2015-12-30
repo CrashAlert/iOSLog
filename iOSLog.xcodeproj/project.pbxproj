@@ -103,13 +103,13 @@
 		26B6CEB71C34225C00B04C89 /* iOSLog */ = {
 			isa = PBXGroup;
 			children = (
+				26E5B0601C3424C800BF7C7F /* MotionLogger.swift */,
 				26B6CEB81C34225C00B04C89 /* AppDelegate.swift */,
 				26B6CEBA1C34225C00B04C89 /* ViewController.swift */,
 				26B6CEBC1C34225C00B04C89 /* Main.storyboard */,
 				26B6CEBF1C34225C00B04C89 /* Assets.xcassets */,
 				26B6CEC11C34225C00B04C89 /* LaunchScreen.storyboard */,
 				26B6CEC41C34225C00B04C89 /* Info.plist */,
-				26E5B0601C3424C800BF7C7F /* MotionLogger.swift */,
 			);
 			path = iOSLog;
 			sourceTree = "<group>";
@@ -264,9 +264,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26E5B0611C3424C800BF7C7F /* MotionLogger.swift in Sources */,
 				26B6CEBB1C34225C00B04C89 /* ViewController.swift in Sources */,
 				26B6CEB91C34225C00B04C89 /* AppDelegate.swift in Sources */,
+				26E5B0611C3424C800BF7C7F /* MotionLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +343,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -387,6 +388,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -408,6 +410,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = iOSLog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -423,6 +426,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = iOSLog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
