@@ -26,4 +26,9 @@ class DataLog {
         let data = header + contents
         return data.dataUsingEncoding(NSUTF8StringEncoding)!
     }
+    
+    func clear() {
+        print("Clearing \(logs.count) elements.")
+        logs.removeAll()
+    }
 }

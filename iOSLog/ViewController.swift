@@ -13,11 +13,14 @@ import Foundation
 
 class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate {
 
+    @IBOutlet weak var time: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NSLog("view did load")
         // Do any additional setup after loading the view, typically from a nib.
         
+        reset() 
         MotionLogger.sharedInstance.start()
     }
 
@@ -50,5 +53,13 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
 
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBAction func reset() {
+        let date = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "HH:mm"
+        let dateString = formatter.stringFromDate(date)
+        time.text = dateString
+        DataLog.sharedInstance.clear()
     }
 }

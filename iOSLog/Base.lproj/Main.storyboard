@@ -18,25 +18,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCy-2E-pge">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" misplaced="YES" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQH-tA-9eR">
+                                <rect key="frame" x="20" y="487" width="38" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tracking since:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mT-7G-Kjm">
+                                <rect key="frame" x="20" y="456" width="116" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="116" id="KLq-xq-Sju"/>
+                                    <constraint firstAttribute="height" constant="21" id="sff-fG-NOn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCy-2E-pge">
+                                <rect key="frame" x="0.0" y="557.5" width="600" height="42.5"/>
                                 <items>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="v75-1M-NUC"/>
                                     <barButtonItem title="Export" id="q99-50-zNG">
                                         <connections>
                                             <action selector="sendMail:" destination="BYZ-38-t0r" id="q8c-C5-0uR"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="z7l-8q-QXd"/>
+                                    <barButtonItem title="Reset" id="OAv-j9-ESK">
+                                        <connections>
+                                            <action selector="reset" destination="BYZ-38-t0r" id="NoT-dp-EYd"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Dnd-EC-Gac"/>
                                 </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="cCy-2E-pge" secondAttribute="trailing" constant="-20" id="9ze-Xh-gGd"/>
+                            <constraint firstItem="cCy-2E-pge" firstAttribute="top" secondItem="OQH-tA-9eR" secondAttribute="bottom" constant="50" id="DNp-xE-rm9"/>
+                            <constraint firstItem="cCy-2E-pge" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="GT5-MU-sn1"/>
+                            <constraint firstItem="0mT-7G-Kjm" firstAttribute="leading" secondItem="OQH-tA-9eR" secondAttribute="leading" id="N0a-R5-BmC"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cCy-2E-pge" secondAttribute="bottom" id="VZy-cK-6qc"/>
+                            <constraint firstItem="0mT-7G-Kjm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cZq-Zc-3Lh"/>
+                            <constraint firstItem="OQH-tA-9eR" firstAttribute="top" secondItem="0mT-7G-Kjm" secondAttribute="bottom" constant="10" id="lJA-7b-30Y"/>
                             <constraint firstItem="cCy-2E-pge" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mXU-QN-7jh"/>
-                            <constraint firstItem="cCy-2E-pge" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="uWS-FL-tNB"/>
+                            <constraint firstItem="cCy-2E-pge" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="rrM-1c-sYG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cCy-2E-pge" secondAttribute="bottom" id="wXw-D3-SvI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="time" destination="OQH-tA-9eR" id="WUR-g1-B14"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
