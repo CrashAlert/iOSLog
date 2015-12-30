@@ -8,26 +8,32 @@
 
 import Foundation
 import CoreMotion
+import CoreLocation
 
 
 class SensorData {
-    let timestamp = NSDate()
+    let timestamp: NSDate
     
     let acceleration: CMAcceleration?
     let rotationRate: CMRotationRate?
+    let location: CLLocation?
     // TODO: magnetometer
     // TODO: GPS
-    // TODO: bearing
+    // TODO: course
     // TODO: alt
     // TODO: GPS error
     
     init(
+        timestamp: NSDate = NSDate(),
         acceleration: CMAcceleration? = nil,
-        rotationRate: CMRotationRate? = nil
+        rotationRate: CMRotationRate? = nil,
+        location: CLLocation? = nil
         )
     {
+        self.timestamp = timestamp
         self.acceleration = acceleration
         self.rotationRate = rotationRate
+        self.location = location
     }
     
     func timestampToString() -> String {
@@ -46,6 +52,11 @@ class SensorData {
         }
     }
     
+    func linearAccelerationToString() -> String {
+        // lin
+        return ""
+    }
+    
     func gyroToString() -> String {
         if let gyro = self.rotationRate {
             let strX = String(format: "%.10f", gyro.x)
@@ -58,9 +69,64 @@ class SensorData {
         }
     }
     
+    func rotationToString() -> String {
+        // x
+        // y
+        // z
+        return ",,"
+    }
+    
+    func magnetometerToString() -> String {
+        // x
+        // y
+        // z
+        return ",,"
+    }
+    
+    func GPSToString() -> String {
+        // lat
+        // lng
+        // course
+        // speed
+        // altitude
+        // error
+        if let loc = location {
+            let lat = String(loc.coordinate.latitude)
+            let lng = String(loc.coordinate.longitude)
+            let course = String(loc.course)
+            let speed = String(loc.speed)
+            let altitude = String(loc.altitude)
+            let horizontal = String(loc.horizontalAccuracy)
+            let vertical = String(loc.verticalAccuracy)
+            
+            return [
+                lat,
+                lng,
+                course,
+                speed,
+                altitude,
+                horizontal,
+                vertical
+            ].joinWithSeparator(",")
+        } else {
+            return ",,,,,,"
+        }
+    }
+    
+    func pressureToString() -> String {
+        return ""
+    }
+    
     func toString() -> String {
-        return "\(self.timestampToString()),"
-                + "\(self.accelerationToString())"
-                + "\(self.gyroToString())"
+        return [
+            self.timestampToString(),
+            self.accelerationToString(),
+            self.linearAccelerationToString(),
+            self.gyroToString(),
+            self.rotationToString(),
+            self.magnetometerToString(),
+            self.GPSToString(),
+            self.pressureToString()
+        ].joinWithSeparator(",")
     }
 }

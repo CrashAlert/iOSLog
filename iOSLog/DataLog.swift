@@ -6,6 +6,9 @@
 //  Copyright © 2015 Sven Mischkewitz. All rights reserved.
 //
 
+import Foundation
+
+
 class DataLog {
     static let sharedInstance = DataLog()
     
@@ -13,6 +16,6 @@ class DataLog {
      * Write SensorData into Buffer File
      */
     func addSensorData(sensorData: SensorData) {
-        
+        NSLog(sensorData.toString())
     }
 }

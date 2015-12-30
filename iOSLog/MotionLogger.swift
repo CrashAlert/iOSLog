@@ -7,28 +7,43 @@
 //
 
 import CoreMotion
+import CoreLocation
 
-class MotionLogger {
-    // CLASS VARIABLES
+
+class MotionLogger: NSObject, CLLocationManagerDelegate  {
+    // == CLASS VARIABLES ==
     static let sharedInstance = MotionLogger()
     
     
-    // INSTANCE VARIABLES
+    // == INSTANCE VARIABLES ==
+    
+    // Motion Manager
     let motionManager = CMMotionManager()
     let gyroUpdateInterval = 0.1
     let accUpdateInterval = 0.1
     
-    init() {
+    // Location Manager
+    let locationManager = CLLocationManager()
+    let locationAccuracy = kCLLocationAccuracyBest
+    
+    override init() {
+        super.init()
+        
         // configure motion manager
         motionManager.gyroUpdateInterval = gyroUpdateInterval
         motionManager.accelerometerUpdateInterval = accUpdateInterval
         
-        NSLog("\(motionManager)")
+        // configure location manager
+        locationManager.desiredAccuracy = locationAccuracy
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
     }
     
     func start() {
         NSLog("Start Motion Manager")
-        self.startAccelerationLog();
+        self.startAccelerationLog()
+        self.startGyroLog()
+        self.startGPSLog()
     }
     
     func startAccelerationLog() {
@@ -67,6 +82,46 @@ class MotionLogger {
         }
     }
     
+    func startGPSLog() {
+        NSLog("Start GPS Log")
+        
+        if (!CLLocationManager.locationServicesEnabled()) {
+            NSLog("GPS not available!")
+            return
+        }
+        
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if (status == .AuthorizedAlways || status == .AuthorizedWhenInUse) {
+            // this only happens when location services were not enabled in startGPSLog before
+            self.startGPSLog()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        for location in locations {
+            let sensorData = SensorData(timestamp: location.timestamp, location: location)
+            DataLog.sharedInstance.addSensorData(sensorData)
+        }
+    }
+    
+    func logAccelerationData(acceleration: CMAcceleration) {
+        let sensorData = SensorData(acceleration: acceleration)
+        
+        // Log data to buffer
+        DataLog.sharedInstance.addSensorData(sensorData)
+        
+        // Update viewcontroller observer
+        // ...
+    }
+    
+    func logGyroData(gyro: CMRotationRate) {
+        let sensorData = SensorData(rotationRate: gyro)
+        DataLog.sharedInstance.addSensorData(sensorData)
+    }
+    
     func stopAccelerationLog() {
         motionManager.stopAccelerometerUpdates()
     }
@@ -75,24 +130,13 @@ class MotionLogger {
         motionManager.stopGyroUpdates()
     }
     
+    func stopGPSLog() {
+        locationManager.stopUpdatingLocation()
+    }
+    
     func stop() {
         self.stopAccelerationLog()
         self.stopGyroLog()
-    }
-    
-    func logAccelerationData(acceleration: CMAcceleration) {
-        let sensorData = SensorData(acceleration: acceleration)
-        
-        // Log data to buffer
-        // DataLog.sharedInstance.addSensorData(sensorData)
-        
-        // Update viewcontroller observer
-        // ...
-    }
-    
-    func logGyroData(gyro: CMRotationRate) {
-        let sensorData = SensorData(rotationRate: gyro)
-        
-        // ... log
+        self.stopGPSLog()
     }
 }
