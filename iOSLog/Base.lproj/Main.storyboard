@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,11 +17,30 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCy-2E-pge">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Export" id="q99-50-zNG">
+                                        <connections>
+                                            <action selector="sendMail:" destination="BYZ-38-t0r" id="q8c-C5-0uR"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="cCy-2E-pge" secondAttribute="trailing" constant="-20" id="9ze-Xh-gGd"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cCy-2E-pge" secondAttribute="bottom" id="VZy-cK-6qc"/>
+                            <constraint firstItem="cCy-2E-pge" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mXU-QN-7jh"/>
+                            <constraint firstItem="cCy-2E-pge" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="uWS-FL-tNB"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="243" y="363"/>
         </scene>
     </scenes>
 </document>
