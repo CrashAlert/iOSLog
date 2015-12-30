@@ -9,18 +9,23 @@
 import UIKit
 import MessageUI
 import Foundation
+import Charts
 
 
-class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate {
+class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate, ChartViewDelegate {
+
 
     @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var lineChart: LineChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         NSLog("view did load")
         // Do any additional setup after loading the view, typically from a nib.
         
-        reset() 
+        reset()
+        
+        lineChart.delegate = self;
         MotionLogger.sharedInstance.start()
     }
 
@@ -54,6 +59,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
     @IBAction func reset() {
         let date = NSDate()
         let formatter = NSDateFormatter()
@@ -61,5 +67,17 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
         let dateString = formatter.stringFromDate(date)
         time.text = dateString
         DataLog.sharedInstance.clear()
+        
+        var xVals = [Int]()
+        var yVals = [ChartDataEntry]()
+        for i in 0...100 {
+            xVals.append(i)
+            yVals.append(ChartDataEntry(value: Double(i * i), xIndex: i))
+        }
+
+        let set = LineChartDataSet(yVals: yVals, label: "Test")
+        let data = LineChartData(xVals: xVals, dataSet: set)
+        self.lineChart.data = data
+        self.view.reloadInputViews()
     }
 }
