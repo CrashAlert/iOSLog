@@ -12,12 +12,12 @@ import Foundation
 class DataLog {
     static let sharedInstance = DataLog()
     var logs = [SensorData]()
+    
     /*
      * Write SensorData into Buffer File
      */
     func addSensorData(sensorData: SensorData) {
         logs.append(sensorData)
-//        print(sensorData.toString())
     }
     
     func csvData() -> NSData {

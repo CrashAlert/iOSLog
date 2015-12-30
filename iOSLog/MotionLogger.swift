@@ -44,6 +44,8 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         locationManager.requestAlwaysAuthorization()
     }
     
+    // == STARTING ==
+    
     func start() {
         NSLog("Start Motion Manager")
         
@@ -145,6 +147,8 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         }
     }
     
+    // == LOGGING ==
+    
     func logAccelerationData(data: CMAccelerometerData) {
         let sensorData = SensorData(timestamp: data.timestamp * 1000, acceleration: data.acceleration)
         DataLog.sharedInstance.addSensorData(sensorData)
@@ -165,6 +169,7 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         DataLog.sharedInstance.addSensorData(sensorData)
     }
     
+    // == STOPPING ==
     func stopAccelerationLog() {
         motionManager.stopAccelerometerUpdates()
     }
