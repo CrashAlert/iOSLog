@@ -19,11 +19,10 @@ class SensorData: CustomStringConvertible {
     let location: CLLocation?
     let magneticField: CMMagneticField?
     let motionActivity: CMMotionActivity?
-    // TODO: magnetometer
     // TODO: pressure on iphone 6
     
     var description: String {
-        return "SensorData(" + ")"
+        return "SensorData(" /* TODO: implement printable info */ + ")"
     }
     
     init(
