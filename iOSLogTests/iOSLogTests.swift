@@ -33,4 +33,13 @@ class iOSLogTests: XCTestCase {
         }
     }
     
+    // SensorData Tests
+    
+    func testEmptySensorData() {
+        let sensorData = SensorData()
+        let str = sensorData.toString()
+        NSLog(str)
+        XCTAssertEqual(str.characters.count, 21, "Empty Sensor Data should contain right count of commas (,)")
+    }
+
 }

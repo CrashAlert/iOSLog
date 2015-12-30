@@ -18,6 +18,7 @@
 		26E5B0631C34260B00BF7C7F /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E5B0621C34260B00BF7C7F /* CoreMotion.framework */; };
 		26E5B0651C344DD400BF7C7F /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B0641C344DD400BF7C7F /* SensorData.swift */; };
 		26E5B0671C34529C00BF7C7F /* DataLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E5B0661C34529C00BF7C7F /* DataLog.swift */; };
+		26E5B0691C3457B200BF7C7F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E5B0681C3457B200BF7C7F /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		26E5B0621C34260B00BF7C7F /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		26E5B0641C344DD400BF7C7F /* SensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
 		26E5B0661C34529C00BF7C7F /* DataLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLog.swift; sourceTree = "<group>"; };
+		26E5B0681C3457B200BF7C7F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26E5B0691C3457B200BF7C7F /* CoreLocation.framework in Frameworks */,
 				26E5B0631C34260B00BF7C7F /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +89,7 @@
 		26B6CEAC1C34225C00B04C89 = {
 			isa = PBXGroup;
 			children = (
+				26E5B0681C3457B200BF7C7F /* CoreLocation.framework */,
 				26E5B0621C34260B00BF7C7F /* CoreMotion.framework */,
 				26B6CEB71C34225C00B04C89 /* iOSLog */,
 				26B6CECC1C34225C00B04C89 /* iOSLogTests */,
@@ -207,6 +211,11 @@
 					26B6CEB41C34225C00B04C89 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = 7JUN85HZJS;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					26B6CEC81C34225C00B04C89 = {
 						CreatedOnToolsVersion = 7.1;
