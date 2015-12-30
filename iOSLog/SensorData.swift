@@ -13,8 +13,8 @@ import CoreMotion
 class SensorData {
     let timestamp = NSDate()
     
-    let acceleration: CMAcceleration
-    let rotationRate: CMRotationRate
+    let acceleration: CMAcceleration?
+    let rotationRate: CMRotationRate?
     // TODO: magnetometer
     // TODO: GPS
     // TODO: bearing
@@ -22,8 +22,8 @@ class SensorData {
     // TODO: GPS error
     
     init(
-        acceleration: CMAcceleration,
-        rotationRate: CMRotationRate
+        acceleration: CMAcceleration? = nil,
+        rotationRate: CMRotationRate? = nil
         )
     {
         self.acceleration = acceleration
@@ -34,8 +34,34 @@ class SensorData {
         return String(timestamp.timeIntervalSince1970 * 1000)
     }
     
+    func accelerationToString() -> String {
+        if let acc = self.acceleration {
+            let strX = String(format: "%.10f", acc.x)
+            let strY = String(format: "%.10f", acc.y)
+            let strZ = String(format: "%.10f", acc.z)
+            
+            return "\(strX),\(strY),\(strZ)"
+        } else {
+            return ",,"
+        }
+    }
+    
+    func gyroToString() -> String {
+        if let gyro = self.rotationRate {
+            let strX = String(format: "%.10f", gyro.x)
+            let strY = String(format: "%.10f", gyro.y)
+            let strZ = String(format: "%.10f", gyro.z)
+            
+            return "\(strX),\(strY),\(strZ)"
+        } else {
+            return ",,"
+        }
+    }
+    
     func toString() -> String {
-        return "\(self.timestampToString())"
+        return "\(self.timestampToString()),"
+                + "\(self.accelerationToString())"
+                + "\(self.gyroToString())"
     }
     
 }

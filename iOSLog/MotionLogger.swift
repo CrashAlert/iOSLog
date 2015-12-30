@@ -43,6 +43,7 @@ class MotionLogger {
         motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.currentQueue()!) {
             (accelerometerData: CMAccelerometerData?, NSError) -> Void in
             self.logAccelerationData(accelerometerData!.acceleration)
+            
             if (NSError != nil) {
                 print("\(NSError)")
             }
@@ -80,17 +81,17 @@ class MotionLogger {
     }
     
     func logAccelerationData(acceleration: CMAcceleration) {
-        let strX = String(format: "%.10f", acceleration.x)
-        let strY = String(format: "%.10f", acceleration.y)
-        let strZ = String(format: "%.10f", acceleration.z)
+        let sensorData = SensorData(acceleration: acceleration)
         
-        // ... log
+        // Log data to buffer
+        // DataLog.sharedInstance.addSensorData(sensorData)
+        
+        // Update viewcontroller observer
+        // ...
     }
     
     func logGyroData(gyro: CMRotationRate) {
-        let strX = String(format: "%.10f", gyro.x)
-        let strY = String(format: "%.10f", gyro.y)
-        let strZ = String(format: "%.10f", gyro.z)
+        let sensorData = SensorData(rotationRate: gyro)
         
         // ... log
     }
