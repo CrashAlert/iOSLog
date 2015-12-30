@@ -137,4 +137,8 @@ class SensorData {
             self.pressureToString()
         ].joinWithSeparator(",")
     }
+    
+    static func header() -> String {
+        return "unix_time,acc_x,acc_y,acc_z,gyr_x,gyr_y,gyr_z,rot_x,rot_y,rot_z,mag_x,mag_y,mag_z,lat,lng,bearing,speed,alt,err_lat,err_lng,pressure,station,run,walk,auto,cycling,unknown\n"
+    }
 }
