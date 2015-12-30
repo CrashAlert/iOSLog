@@ -12,6 +12,7 @@ import CoreLocation
 
 class MotionLogger: NSObject, CLLocationManagerDelegate  {
     // == CLASS VARIABLES ==
+    
     static let sharedInstance = MotionLogger()
     
     
@@ -43,6 +44,7 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
+    
     
     // == STARTING ==
     
@@ -147,6 +149,7 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         }
     }
     
+    
     // == LOGGING ==
     
     func logAccelerationData(data: CMAccelerometerData) {
@@ -169,7 +172,9 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         DataLog.sharedInstance.addSensorData(sensorData)
     }
     
+    
     // == STOPPING ==
+    
     func stopAccelerationLog() {
         motionManager.stopAccelerometerUpdates()
     }
