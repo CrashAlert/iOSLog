@@ -14,6 +14,11 @@ import Foundation
 class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate {
 
     @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var sessionName: UITextField!
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        sessionName.resignFirstResponder()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +35,21 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     }
 
     @IBAction func sendMail(sender: AnyObject) {
+        let name = sessionName.text!
+        if name.isEmpty {
+            let alert = UIAlertView(
+                title: "No Session Name",
+                message: "Fill in a session name.",
+                delegate: nil,
+                cancelButtonTitle: "OK"
+            )
+            alert.show()
+            return
+        }
+        
+        
         if( MFMailComposeViewController.canSendMail() ) {
-            print(DataLog.sharedInstance.logs.count)
+            NSLog("Sent \(DataLog.sharedInstance.logs.count) rows of data")
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self
 
@@ -42,10 +60,15 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
             let dateString = formatter.stringFromDate(date)
             
             // Set the subject of the email
-            mailComposer.setSubject("[\(dateString)] Test drive")
+            mailComposer.setSubject("[\(dateString)] \(name) - Test drive")
+            
+            // Time for filename
+            let formatterForName = NSDateFormatter()
+            formatterForName.dateFormat = "yyyyMMddHHmmss"
+            let dateName = formatterForName.stringFromDate(date)
             
             let data = DataLog.sharedInstance.csvData()
-            mailComposer.addAttachmentData(data, mimeType: "text/csv", fileName: "\(Int(NSDate().timeIntervalSince1970)).csv")
+            mailComposer.addAttachmentData(data, mimeType: "text/csv", fileName: "\(dateName)-\(name).csv")
             
             self.presentViewController(mailComposer, animated: true, completion: nil)
         }
