@@ -8,6 +8,36 @@
 
 import CoreMotion
 
+class SensorData {
+    let timestamp = NSDate()
+    
+    let acceleration: CMAcceleration
+    let rotationRate: CMRotationRate
+    // TODO: magnetometer
+    // TODO: GPS
+    // TODO: bearing
+    // TODO: alt
+    // TODO: GPS error
+    
+    init(
+        acceleration: CMAcceleration,
+        rotationRate: CMRotationRate
+    )
+    {
+        self.acceleration = acceleration
+        self.rotationRate = rotationRate
+    }
+    
+    func timestampToString() -> String {
+        return String(timestamp.timeIntervalSince1970 * 1000)
+    }
+    
+    func toString() -> String {
+        return "\(self.timestampToString())"
+    }
+    
+}
+
 class MotionLogger {
 // CLASS VARIABLES
     static let sharedInstance = MotionLogger()
@@ -15,8 +45,8 @@ class MotionLogger {
    
 // INSTANCE VARIABLES
     let motionManager = CMMotionManager()
-    let gyroUpdateInterval = 0.2
-    let accUpdateInterval = 0.2
+    let gyroUpdateInterval = 0.1
+    let accUpdateInterval = 0.1
     
     init() {
         // configure motion manager
@@ -49,18 +79,34 @@ class MotionLogger {
         }
     }
     
-//    func startGyroLog() {
-//        motionManager.startGyroUpdatesToQueue(NSOperationQueue.currentQueue()!) {
-//            
-//        }
-//    }
+    func startGyroLog() {
+        NSLog("Start Gyro Logging")
+        
+        if (!motionManager.gyroAvailable) {
+            NSLog("Gyro not available!")
+            return
+        }
+        
+        motionManager.startGyroUpdatesToQueue(NSOperationQueue.currentQueue()!) {
+            (gyroData: CMGyroData?, NSError) -> Void in
+            self.logGyroData(gyroData!.rotationRate)
+            if (NSError != nil) {
+                print("\(NSError)")
+            }
+        }
+    }
     
     func stopAccelerationLog() {
         motionManager.stopAccelerometerUpdates()
     }
     
+    func stopGyroLog() {
+        motionManager.stopGyroUpdates()
+    }
+    
     func stop() {
-        
+        self.stopAccelerationLog()
+        self.stopGyroLog()
     }
     
     func logAccelerationData(acceleration: CMAcceleration) {
@@ -68,7 +114,15 @@ class MotionLogger {
         let strY = String(format: "%.10f", acceleration.y)
         let strZ = String(format: "%.10f", acceleration.z)
      
+        // ... log
+    }
+    
+    func logGyroData(gyro: CMRotationRate) {
+        let strX = String(format: "%.10f", gyro.x)
+        let strY = String(format: "%.10f", gyro.y)
+        let strZ = String(format: "%.10f", gyro.z)
         
+        // ... log
     }
 }
 
