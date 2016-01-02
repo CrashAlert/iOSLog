@@ -9,6 +9,7 @@
 import Foundation
 import CoreMotion
 import CoreLocation
+import QuartzCore
 
 
 class SensorData: CustomStringConvertible {
@@ -18,6 +19,9 @@ class SensorData: CustomStringConvertible {
             "acc_x",
             "acc_y",
             "acc_z",
+            "lin_acc_x",
+            "lin_acc_y",
+            "lin_acc_z",
             "gyr_x",
             "gyr_y",
             "gyr_z",
@@ -41,11 +45,11 @@ class SensorData: CustomStringConvertible {
             "auto",
             "cycling",
             "unknown"
-        ].joinWithSeparator(",")
+        ].joinWithSeparator(",") + ","
     }
     
     
-    let timestamp: NSTimeInterval
+    let timestamp: Double
     
     let acceleration: CMAcceleration?
     let rotationRate: CMRotationRate?
@@ -59,7 +63,7 @@ class SensorData: CustomStringConvertible {
     }
     
     init(
-        timestamp: NSTimeInterval = NSDate().timeIntervalSince1970 * 1000,
+        timestamp: Double = CACurrentMediaTime() * 1e9,
         acceleration: CMAcceleration? = nil,
         rotationRate: CMRotationRate? = nil,
         location: CLLocation? = nil,
@@ -73,10 +77,11 @@ class SensorData: CustomStringConvertible {
         self.location = location
         self.magneticField = magneticField
         self.motionActivity = motionActivity
+        NSLog(String(format: "%.0f", self.timestamp))
     }
     
     func timestampToString() -> String {
-        return String(timestamp)
+        return String(format: "%.0f", timestamp)
     }
     
     func accelerationToString() -> String {
@@ -93,7 +98,7 @@ class SensorData: CustomStringConvertible {
     
     func linearAccelerationToString() -> String {
         // lin
-        return ""
+        return ",,"
     }
     
     func gyroToString() -> String {
