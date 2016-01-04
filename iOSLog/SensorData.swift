@@ -52,6 +52,7 @@ class SensorData: CustomStringConvertible {
     let timestamp: Double
     
     let acceleration: CMAcceleration?
+    static let gravity = 9.80665
     let rotationRate: CMRotationRate?
     let location: CLLocation?
     let magneticField: CMMagneticField?
@@ -86,9 +87,9 @@ class SensorData: CustomStringConvertible {
     
     func accelerationToString() -> String {
         if let acc = self.acceleration {
-            let strX = String(format: "%.10f", acc.x)
-            let strY = String(format: "%.10f", acc.y)
-            let strZ = String(format: "%.10f", acc.z)
+            let strX = String(format: "%.10f", acc.x * SensorData.gravity)
+            let strY = String(format: "%.10f", acc.y * SensorData.gravity)
+            let strZ = String(format: "%.10f", acc.z * SensorData.gravity)
             
             return "\(strX),\(strY),\(strZ)"
         } else {
