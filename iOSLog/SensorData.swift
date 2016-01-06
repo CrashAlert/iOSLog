@@ -15,7 +15,7 @@ import QuartzCore
 class SensorData: CustomStringConvertible {
     static func header() -> String {
         return [
-            "unix_time",
+            "time",
             "acc_x",
             "acc_y",
             "acc_z",
