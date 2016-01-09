@@ -104,6 +104,8 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
             mailComposer.addAttachmentData(data, mimeType: "text/csv", fileName: "\(dateName)-\(name)-ios.csv")
             
             self.presentViewController(mailComposer, animated: true, completion: nil)
+            
+            self.resetData()
         }
     }
 
@@ -124,12 +126,16 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     // RESET
     //
     
-    @IBAction func reset() {
+    func resetData() {
         let date = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "HH:mm"
         let dateString = formatter.stringFromDate(date)
         time.text = dateString
         DataLog.sharedInstance.clear()
+    }
+    
+    @IBAction func reset() {
+        resetData()
     }
 }
