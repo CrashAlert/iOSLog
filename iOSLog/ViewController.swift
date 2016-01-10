@@ -9,10 +9,11 @@
 import UIKit
 import MessageUI
 import Foundation
-
+import Charts
 
 class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate {
 
+    @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var sessionName: UITextField!
     
@@ -21,8 +22,14 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
         NSLog("view did load")
         // Do any additional setup after loading the view, typically from a nib.
         
-        reset() 
+        reset()
         MotionLogger.sharedInstance.start()
+        
+        intializeChart()
+        
+        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        let unitsSold = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0, 4.0, 18.0, 2.0, 4.0, 5.0, 4.0]
+        updateChart(months, values: unitsSold)
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +41,47 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
         sessionName.resignFirstResponder()
     }
     
+    //
+    // CHART
+    //
+    func intializeChart() {
+        // Setup
+        lineChartView.descriptionText = ""
+        lineChartView.noDataText = "Kein Limit; kein Limit; Bitch, ich kenne kein Limit."
+        lineChartView.legend.enabled = false
+        lineChartView.xAxis.labelPosition = .Bottom
+
+        // Turn off grid lines
+        lineChartView.xAxis.drawGridLinesEnabled = false
+        lineChartView.rightAxis.drawGridLinesEnabled = false
+        
+        // Turn off axis lines
+        lineChartView.xAxis.drawAxisLineEnabled = false
+        lineChartView.leftAxis.drawAxisLineEnabled = false
+        lineChartView.leftAxis.enabled = false
+        lineChartView.rightAxis.enabled = false
+        lineChartView.rightAxis.drawAxisLineEnabled = false
+
+        // Background
+        lineChartView.drawGridBackgroundEnabled = false
+    }
+    
+    func updateChart(dataPoints: [String], values: [Double]) {
+        let dataEntries = values.enumerate().map { ChartDataEntry(value: $1, xIndex: $0) }
+
+        let dataSet = LineChartDataSet(yVals: dataEntries)
+//        chartDataSet.colors = ChartColorTemplates.pastel()
+        dataSet.drawCirclesEnabled = false
+        dataSet.drawFilledEnabled = true
+        dataSet.drawValuesEnabled = false
+        
+        let data = LineChartData(xVals: dataPoints, dataSet: dataSet)
+        lineChartView.data = data
+//        lineChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0)
+        
+//        let ll = ChartLimitLine(limit: 10.0, label: "Target")
+//        lineChartView.rightAxis.addLimitLine(ll)
+    }
     
     //
     // EXPORT
