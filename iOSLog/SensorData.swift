@@ -11,8 +11,14 @@ import CoreMotion
 import CoreLocation
 import QuartzCore
 
+import RealmSwift
 
-class SensorData: CustomStringConvertible {
+
+class SensorData: Object, CustomStringConvertible {
+    override static func ignoredProperties() -> [String] {
+        return ["description"]
+    }
+    
     static func header() -> String {
         return [
             "time",
@@ -59,9 +65,10 @@ class SensorData: CustomStringConvertible {
     let motionActivity: CMMotionActivity?
     // TODO: pressure on iphone 6
     
-    var description: String {
+    override var description: String {
         return "SensorData(" /* TODO: implement printable info */ + ")"
     }
+    
     
     init(
         timestamp: Double = CACurrentMediaTime() * 1e9,
@@ -79,6 +86,11 @@ class SensorData: CustomStringConvertible {
         self.magneticField = magneticField
         self.motionActivity = motionActivity
         NSLog(String(format: "%.0f", self.timestamp))
+        super.init()
+    }
+
+    required init() {
+        fatalError("init() has not been implemented")
     }
     
     func timestampToString() -> String {
