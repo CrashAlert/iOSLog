@@ -14,7 +14,7 @@ import QuartzCore
 import RealmSwift
 
 
-class StorableSensorData: Object {
+class SensorData: Object {
     static let gravity = 9.80665
     
     static func header() -> String {
@@ -52,7 +52,7 @@ class StorableSensorData: Object {
             ].joinWithSeparator(",") + ","
     }
 
-    dynamic var time: Double
+    dynamic var time: Double = CACurrentMediaTime() * 1e9
     
     let acc_x = RealmOptional<Double>()
     let acc_y = RealmOptional<Double>()
@@ -83,9 +83,8 @@ class StorableSensorData: Object {
     let cycling = RealmOptional<Bool>()
     let unknown = RealmOptional<Bool>()
     
-    required init() {
-        time = CACurrentMediaTime() * 1e9
-        super.init()
+    func setNanoTime(t: Double) {
+        time = t
     }
     
     func setAcceleration(acc: CMAcceleration) {
@@ -129,13 +128,17 @@ class StorableSensorData: Object {
         return String(format: "%.0f", time)
     }
     
+    static func TripleToString(x: Double, y: Double, z: Double) -> String {
+        let strX = String(format: "%.10f", x)
+        let strY = String(format: "%.10f", y)
+        let strZ = String(format: "%.10f", z)
+        return "\(strX),\(strY),\(strZ)"
+    }
+    
     func accelerationToString() -> String {
         if let _ = self.acc_x.value {
-            let strX = String(format: "%.10f", acc_x.value! * SensorData.gravity)
-            let strY = String(format: "%.10f", acc_y.value! * SensorData.gravity)
-            let strZ = String(format: "%.10f", acc_z.value! * SensorData.gravity)
-            
-            return "\(strX),\(strY),\(strZ)"
+            return SensorData.TripleToString(
+                acc_x.value!, y: acc_y.value!, z: acc_z.value!)
         }
         else {
             return ",,"
@@ -149,11 +152,8 @@ class StorableSensorData: Object {
     
     func gyroToString() -> String {
         if let _ = self.gyr_x.value {
-            let strX = String(format: "%.10f", gyr_x.value!)
-            let strY = String(format: "%.10f", gyr_y.value!)
-            let strZ = String(format: "%.10f", gyr_z.value!)
-            
-            return "\(strX),\(strY),\(strZ)"
+            return SensorData.TripleToString(
+                gyr_x.value!, y: gyr_y.value!, z: gyr_z.value!)
         }
         else {
             return ",,"
@@ -161,17 +161,14 @@ class StorableSensorData: Object {
     }
     
     func rotationPlaceholder() -> String {
-        // Currently only written by android
+        // currently only written by android
         return ",,"
     }
     
     func magnetometerToString() -> String {
-        if let _ = self.mag_x.value {
-            let strX = String(format: "%.10f", mag_x.value!)
-            let strY = String(format: "%.10f", mag_y.value!)
-            let strZ = String(format: "%.10f", mag_z.value!)
-            
-            return "\(strX),\(strY),\(strZ)"
+        if let _ = mag_x.value {
+            return SensorData.TripleToString(
+                mag_x.value!, y: mag_y.value!, z: mag_z.value!)
         }
         else {
             return ",,"
@@ -180,13 +177,13 @@ class StorableSensorData: Object {
     
     func GPSToString() -> String {
         if let _ = self.lat.value {
-            let lat = String(self.lat)
-            let lng = String(self.lng)
-            let course = String(self.bearing)
-            let speed = String(self.speed)
-            let altitude = String(self.alt)
-            let horizontal = String(self.err_lat)
-            let vertical = String(self.err_lng)
+            let lat = String(self.lat.value!)
+            let lng = String(self.lng.value!)
+            let course = String(self.bearing.value!)
+            let speed = String(self.speed.value!)
+            let altitude = String(self.alt.value!)
+            let horizontal = String(self.err_lat.value!)
+            let vertical = String(self.err_lng.value!)
             
             return [
                 lat,
@@ -242,201 +239,4 @@ class StorableSensorData: Object {
             self.motionActivityToString()
             ].joinWithSeparator(",")
     }
-}
-
-
-class SensorData: CustomStringConvertible {
-    static func header() -> String {
-        return [
-            "time",
-            "acc_x",
-            "acc_y",
-            "acc_z",
-            "lin_acc_x",
-            "lin_acc_y",
-            "lin_acc_z",
-            "gyr_x",
-            "gyr_y",
-            "gyr_z",
-            "rot_x",
-            "rot_y",
-            "rot_z",
-            "mag_x",
-            "mag_y",
-            "mag_z",
-            "lat",
-            "lng",
-            "bearing",
-            "speed",
-            "alt",
-            "err_lat",
-            "err_lng",
-            "pressure",
-            "station",
-            "run",
-            "walk",
-            "auto",
-            "cycling",
-            "unknown"
-        ].joinWithSeparator(",") + ","
-    }
-    
-    
-    let timestamp: Double
-    
-    let acceleration: CMAcceleration?
-    static let gravity = 9.80665
-    let rotationRate: CMRotationRate?
-    let location: CLLocation?
-    let magneticField: CMMagneticField?
-    let motionActivity: CMMotionActivity?
-    // TODO: pressure on iphone 6
-    
-    var description: String {
-        return "SensorData(" /* TODO: implement printable info */ + ")"
-    }
-    
-    init(
-        timestamp: Double = CACurrentMediaTime() * 1e9,
-        acceleration: CMAcceleration? = nil,
-        rotationRate: CMRotationRate? = nil,
-        location: CLLocation? = nil,
-        magneticField: CMMagneticField? = nil,
-        motionActivity: CMMotionActivity? = nil
-        )
-    {
-        self.timestamp = timestamp
-        self.acceleration = acceleration
-        self.rotationRate = rotationRate
-        self.location = location
-        self.magneticField = magneticField
-        self.motionActivity = motionActivity
-        NSLog(String(format: "%.0f", self.timestamp))
-    }
-    
-    func timestampToString() -> String {
-        return String(format: "%.0f", timestamp)
-    }
-    
-    func accelerationToString() -> String {
-        if let acc = self.acceleration {
-            let strX = String(format: "%.10f", acc.x * SensorData.gravity)
-            let strY = String(format: "%.10f", acc.y * SensorData.gravity)
-            let strZ = String(format: "%.10f", acc.z * SensorData.gravity)
-            
-            return "\(strX),\(strY),\(strZ)"
-        } else {
-            return ",,"
-        }
-    }
-    
-    func linearAccelerationToString() -> String {
-        // lin
-        return ",,"
-    }
-    
-    func gyroToString() -> String {
-        if let gyro = self.rotationRate {
-            let strX = String(format: "%.10f", gyro.x)
-            let strY = String(format: "%.10f", gyro.y)
-            let strZ = String(format: "%.10f", gyro.z)
-            
-            return "\(strX),\(strY),\(strZ)"
-        } else {
-            return ",,"
-        }
-    }
-    
-    func rotationToString() -> String {
-        // x
-        // y
-        // z
-        return ",,"
-    }
-    
-    func magnetometerToString() -> String {
-        // x
-        // y
-        // z
-        if let mag = self.magneticField {
-            let strX = String(format: "%.10f", mag.x)
-            let strY = String(format: "%.10f", mag.y)
-            let strZ = String(format: "%.10f", mag.z)
-            
-            return "\(strX),\(strY),\(strZ)"
-        } else {
-            return ",,"
-        }
-    }
-    
-    func GPSToString() -> String {
-        // lat
-        // lng
-        // course
-        // speed
-        // altitude
-        // error
-        if let loc = location {
-            let lat = String(loc.coordinate.latitude)
-            let lng = String(loc.coordinate.longitude)
-            let course = String(loc.course)
-            let speed = String(loc.speed)
-            let altitude = String(loc.altitude)
-            let horizontal = String(loc.horizontalAccuracy)
-            let vertical = String(loc.verticalAccuracy)
-            
-            return [
-                lat,
-                lng,
-                course,
-                speed,
-                altitude,
-                horizontal,
-                vertical
-            ].joinWithSeparator(",")
-        } else {
-            return ",,,,,,"
-        }
-    }
-    
-    func pressureToString() -> String {
-        return ""
-    }
-    
-    func motionActivityToString() -> String {
-        if let act = motionActivity {
-            let stationary = act.stationary ? "1" : "0"
-            let running = act.running ? "1" : "0"
-            let walking = act.walking ? "1" : "0"
-            let automotive = act.automotive ? "1" : "0"
-            let cycling = act.cycling ? "1" : "0"
-            let unknown = act.unknown ? "1" : "0"
-            
-            return [
-                stationary,
-                running,
-                walking,
-                automotive,
-                cycling,
-                unknown
-            ].joinWithSeparator(",")
-        } else {
-            return ",,,,,"
-        }
-    }
-    
-    func toString() -> String {
-        return [
-            self.timestampToString(),
-            self.accelerationToString(),
-            self.linearAccelerationToString(),
-            self.gyroToString(),
-            self.rotationToString(),
-            self.magnetometerToString(),
-            self.GPSToString(),
-            self.pressureToString(),
-            self.motionActivityToString()
-        ].joinWithSeparator(",")
-    }
-    
 }
