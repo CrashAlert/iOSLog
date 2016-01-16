@@ -27,7 +27,7 @@ class DataLog {
     
     func csvData() -> NSData {
         let header = [ SensorData.header() ]
-        let array = try! Realm().objects(SensorData).sorted("timestamp")
+        let array = try! Realm().objects(SensorData).sorted("time")
         let contents = array.map({$0.toString()})
         let data = (header + contents).joinWithSeparator("\n")
         return data.dataUsingEncoding(NSUTF8StringEncoding)!
