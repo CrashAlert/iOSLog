@@ -8,27 +8,38 @@
 
 import Foundation
 
+import RealmSwift
+
 
 class DataLog {
     static let sharedInstance = DataLog()
-    var logs = [SensorData]()
+    let realm = try! Realm()
     
     /*
      * Write SensorData into Buffer File
      */
     func addSensorData(sensorData: SensorData) {
-        logs.append(sensorData)
+        // Save your object
+        realm.beginWrite()
+        realm.add(sensorData)
+        try! realm.commitWrite()
     }
     
     func csvData() -> NSData {
         let header = [ SensorData.header() ]
-        let contents = logs.map({$0.toString()})
+        let array = try! Realm().objects(SensorData).sorted("timestamp")
+        let contents = array.map({$0.toString()})
         let data = (header + contents).joinWithSeparator("\n")
         return data.dataUsingEncoding(NSUTF8StringEncoding)!
     }
     
+    func rows() -> Int {
+        return try! Realm().objects(SensorData).count
+    }
+    
     func clear() {
-        print("Clearing \(logs.count) elements.")
-        logs.removeAll()
+        try! realm.write {
+            realm.deleteAll()
+        }
     }
 }

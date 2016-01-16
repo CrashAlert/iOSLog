@@ -80,7 +80,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
 
     func sendMail() {
         if( MFMailComposeViewController.canSendMail() ) {
-            NSLog("Sent \(DataLog.sharedInstance.logs.count) rows of data")
+            NSLog("Sent \(DataLog.sharedInstance.rows()) rows of data")
             
             let mailComposer = MFMailComposeViewController()
             mailComposer.mailComposeDelegate = self

@@ -14,11 +14,120 @@ import QuartzCore
 import RealmSwift
 
 
-class SensorData: Object, CustomStringConvertible {
-    override static func ignoredProperties() -> [String] {
-        return ["description"]
+class StorableSensorData: Object {
+    static let gravity = 9.80665
+    
+    static func header() -> String {
+        return [
+            "time",
+            "acc_x",
+            "acc_y",
+            "acc_z",
+            "lin_acc_x",
+            "lin_acc_y",
+            "lin_acc_z",
+            "gyr_x",
+            "gyr_y",
+            "gyr_z",
+            "rot_x",
+            "rot_y",
+            "rot_z",
+            "mag_x",
+            "mag_y",
+            "mag_z",
+            "lat",
+            "lng",
+            "bearing",
+            "speed",
+            "alt",
+            "err_lat",
+            "err_lng",
+            "pressure",
+            "station",
+            "run",
+            "walk",
+            "auto",
+            "cycling",
+            "unknown"
+            ].joinWithSeparator(",") + ","
+    }
+
+    dynamic var time: Double
+    
+    let acc_x = RealmOptional<Double>()
+    let acc_y = RealmOptional<Double>()
+    let acc_z = RealmOptional<Double>()
+    
+    let gyr_x = RealmOptional<Double>()
+    let gyr_y = RealmOptional<Double>()
+    let gyr_z = RealmOptional<Double>()
+    
+    let mag_x = RealmOptional<Double>()
+    let mag_y = RealmOptional<Double>()
+    let mag_z = RealmOptional<Double>()
+    
+    let lat = RealmOptional<Double>()
+    let lng = RealmOptional<Double>()
+    let bearing = RealmOptional<Double>()
+    let speed = RealmOptional<Double>()
+    let alt = RealmOptional<Double>()
+    let err_lat = RealmOptional<Double>()
+    let err_lng = RealmOptional<Double>()
+    
+    let pressure = RealmOptional<Double>()
+    
+    let station = RealmOptional<Bool>()
+    let run = RealmOptional<Bool>()
+    let walk = RealmOptional<Bool>()
+    let auto = RealmOptional<Bool>()
+    let cycling = RealmOptional<Bool>()
+    let unknown = RealmOptional<Bool>()
+    
+    required init() {
+        time = CACurrentMediaTime() * 1e9
+        super.init()
     }
     
+    func setAcceleration(acc: CMAcceleration) {
+        acc_x.value = acc.x * SensorData.gravity
+        acc_y.value = acc.y * SensorData.gravity
+        acc_z.value = acc.z * SensorData.gravity
+    }
+    
+    func setGyroscope(gyr: CMRotationRate) {
+        gyr_x.value = gyr.x
+        gyr_y.value = gyr.y
+        gyr_z.value = gyr.z
+    }
+    
+    func setMagneticField(mag: CMMagneticField) {
+        mag_x.value = mag.x
+        mag_y.value = mag.y
+        mag_z.value = mag.z
+    }
+    
+    func setGPS(gps: CLLocation) {
+        lat.value = gps.coordinate.latitude
+        lng.value = gps.coordinate.longitude
+        bearing.value = gps.course
+        speed.value = gps.speed
+        alt.value = gps.altitude
+        err_lat.value = gps.horizontalAccuracy
+        err_lng.value = gps.verticalAccuracy
+    }
+    
+    func setMotionActivity(act: CMMotionActivity) {
+        station.value = act.stationary
+        run.value = act.running
+        walk.value = act.walking
+        auto.value = act.automotive
+        cycling.value = act.cycling
+        unknown.value = act.unknown
+    }
+}
+
+
+class SensorData: CustomStringConvertible {
     static func header() -> String {
         return [
             "time",
@@ -65,10 +174,9 @@ class SensorData: Object, CustomStringConvertible {
     let motionActivity: CMMotionActivity?
     // TODO: pressure on iphone 6
     
-    override var description: String {
+    var description: String {
         return "SensorData(" /* TODO: implement printable info */ + ")"
     }
-    
     
     init(
         timestamp: Double = CACurrentMediaTime() * 1e9,
@@ -86,11 +194,6 @@ class SensorData: Object, CustomStringConvertible {
         self.magneticField = magneticField
         self.motionActivity = motionActivity
         NSLog(String(format: "%.0f", self.timestamp))
-        super.init()
-    }
-
-    required init() {
-        fatalError("init() has not been implemented")
     }
     
     func timestampToString() -> String {
