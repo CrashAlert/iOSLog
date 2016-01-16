@@ -124,6 +124,124 @@ class StorableSensorData: Object {
         cycling.value = act.cycling
         unknown.value = act.unknown
     }
+    
+    func timeToString() -> String {
+        return String(format: "%.0f", time)
+    }
+    
+    func accelerationToString() -> String {
+        if let _ = self.acc_x.value {
+            let strX = String(format: "%.10f", acc_x.value! * SensorData.gravity)
+            let strY = String(format: "%.10f", acc_y.value! * SensorData.gravity)
+            let strZ = String(format: "%.10f", acc_z.value! * SensorData.gravity)
+            
+            return "\(strX),\(strY),\(strZ)"
+        }
+        else {
+            return ",,"
+        }
+    }
+    
+    func linearPlaceholder() -> String {
+        // Only written by android
+        return ",,"
+    }
+    
+    func gyroToString() -> String {
+        if let _ = self.gyr_x.value {
+            let strX = String(format: "%.10f", gyr_x.value!)
+            let strY = String(format: "%.10f", gyr_y.value!)
+            let strZ = String(format: "%.10f", gyr_z.value!)
+            
+            return "\(strX),\(strY),\(strZ)"
+        }
+        else {
+            return ",,"
+        }
+    }
+    
+    func rotationPlaceholder() -> String {
+        // Currently only written by android
+        return ",,"
+    }
+    
+    func magnetometerToString() -> String {
+        if let _ = self.mag_x.value {
+            let strX = String(format: "%.10f", mag_x.value!)
+            let strY = String(format: "%.10f", mag_y.value!)
+            let strZ = String(format: "%.10f", mag_z.value!)
+            
+            return "\(strX),\(strY),\(strZ)"
+        }
+        else {
+            return ",,"
+        }
+    }
+    
+    func GPSToString() -> String {
+        if let _ = self.lat.value {
+            let lat = String(self.lat)
+            let lng = String(self.lng)
+            let course = String(self.bearing)
+            let speed = String(self.speed)
+            let altitude = String(self.alt)
+            let horizontal = String(self.err_lat)
+            let vertical = String(self.err_lng)
+            
+            return [
+                lat,
+                lng,
+                course,
+                speed,
+                altitude,
+                horizontal,
+                vertical
+                ].joinWithSeparator(",")
+        } else {
+            return ",,,,,,"
+        }
+    }
+    
+    func pressureToString() -> String {
+        // currently only written by android
+        return ""
+    }
+    
+    func motionActivityToString() -> String {
+        if let _ = self.station.value {
+            let stationary = self.station.value! ? "1" : "0"
+            let running = self.run.value! ? "1" : "0"
+            let walking = self.walk.value! ? "1" : "0"
+            let automotive = self.auto.value! ? "1" : "0"
+            let cycling = self.cycling.value! ? "1" : "0"
+            let unknown = self.unknown.value! ? "1" : "0"
+            
+            return [
+                stationary,
+                running,
+                walking,
+                automotive,
+                cycling,
+                unknown
+                ].joinWithSeparator(",")
+        } else {
+            return ",,,,,"
+        }
+    }
+    
+    func toString() -> String {
+        return [
+            self.timeToString(),
+            self.accelerationToString(),
+            self.linearPlaceholder(),
+            self.gyroToString(),
+            self.rotationPlaceholder(),
+            self.magnetometerToString(),
+            self.GPSToString(),
+            self.pressureToString(),
+            self.motionActivityToString()
+            ].joinWithSeparator(",")
+    }
 }
 
 
