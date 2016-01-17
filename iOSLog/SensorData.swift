@@ -78,7 +78,7 @@ class SensorData: CustomStringConvertible {
         self.location = location
         self.magneticField = magneticField
         self.motionActivity = motionActivity
-        NSLog(String(format: "%.0f", self.timestamp))
+//        NSLog(String(format: "%.0f", self.timestamp))
     }
     
     func timestampToString() -> String {

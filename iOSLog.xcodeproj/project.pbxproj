@@ -24,6 +24,8 @@
 		26EB12191C3AC99200C099F8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB12181C3AC99200C099F8 /* Reachability.swift */; };
 		C6029EDF1C42B94D009C891D /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6029EDA1C42B92D009C891D /* Charts.framework */; };
 		C6029EE01C42B94D009C891D /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6029EDA1C42B92D009C891D /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C6D1BA411C42DE08007160A2 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D1BA401C42DE08007160A2 /* Exporter.swift */; };
+		C6DC20A91C42CB3800E3E68C /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DC20A81C42CB3800E3E68C /* ChartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,8 @@
 		26EB12161C3AC84400C099F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		26EB12181C3AC99200C099F8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		C6029ED31C42B92D009C891D /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = ../Charts/Charts.xcodeproj; sourceTree = "<group>"; };
+		C6D1BA401C42DE08007160A2 /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
+		C6DC20A81C42CB3800E3E68C /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,10 +170,12 @@
 		26B6CEB71C34225C00B04C89 /* iOSLog */ = {
 			isa = PBXGroup;
 			children = (
+				C6DC20A81C42CB3800E3E68C /* ChartViewController.swift */,
 				26EB12181C3AC99200C099F8 /* Reachability.swift */,
 				26E5B0601C3424C800BF7C7F /* MotionLogger.swift */,
 				26B6CEB81C34225C00B04C89 /* AppDelegate.swift */,
 				26B6CEBA1C34225C00B04C89 /* ViewController.swift */,
+				C6D1BA401C42DE08007160A2 /* Exporter.swift */,
 				26B6CEBC1C34225C00B04C89 /* Main.storyboard */,
 				26B6CEBF1C34225C00B04C89 /* Assets.xcassets */,
 				26B6CEC11C34225C00B04C89 /* LaunchScreen.storyboard */,
@@ -379,10 +385,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				26EB12191C3AC99200C099F8 /* Reachability.swift in Sources */,
+				C6D1BA411C42DE08007160A2 /* Exporter.swift in Sources */,
 				26B6CEBB1C34225C00B04C89 /* ViewController.swift in Sources */,
 				26B6CEB91C34225C00B04C89 /* AppDelegate.swift in Sources */,
 				26E5B0671C34529C00BF7C7F /* DataLog.swift in Sources */,
 				26E5B0611C3424C800BF7C7F /* MotionLogger.swift in Sources */,
+				C6DC20A91C42CB3800E3E68C /* ChartViewController.swift in Sources */,
 				26EB12151C3AC74C00C099F8 /* ReachabilityManager.swift in Sources */,
 				26E5B0651C344DD400BF7C7F /* SensorData.swift in Sources */,
 			);
