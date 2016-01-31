@@ -13,6 +13,15 @@ import QuartzCore
 
 import RealmSwift
 
+/*
+*  SensorData
+*
+*  Discussion:
+*      Holds a set of sensor data which is converted into a String,
+*      representing a line in CSV file. The header ordering is given
+*      in the header() method and has to be consistent to the server
+*      and Android version.
+*/
 
 class SensorData: Object {
     static let gravity = 9.80665
