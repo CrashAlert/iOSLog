@@ -39,7 +39,7 @@ class ChartViewController: UIViewController {
         chart.rightAxis.enabled = true
         chart.rightAxis.drawAxisLineEnabled = false
         
-        chart.rightAxis.valueFormatter = gFormatter()
+//        chart.rightAxis.valueFormatter = gFormatter()
         
         // Background
         chart.drawGridBackgroundEnabled = false
@@ -64,7 +64,8 @@ class ChartViewController: UIViewController {
 class gFormatter: NSNumberFormatter {
     
     override func stringFromNumber(number: NSNumber) -> String? {
-        return String(number)
+        // TODO: Slice out first characters
+        return String(number)      
     }
     
 }
