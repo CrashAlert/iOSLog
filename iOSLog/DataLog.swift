@@ -11,8 +11,21 @@ import RealmSwift
 
 
 class DataLog {
-    static let sharedInstance = DataLog()
-    let realm = try! Realm()
+    // reuse the same realm instance per session
+    static let realm: Realm = try! Realm()
+    
+    // ...but create a new session object
+    let session: Session
+    
+    init(sessionName: String) {
+        session = Session()
+        session.sessionName = sessionName
+        
+        try! DataLog.realm.write {
+            NSLog("Adding new Session to Realm")
+            DataLog.realm.add(session)
+        }
+    }
     
     /*
      * Write SensorData into Buffer File
@@ -21,26 +34,28 @@ class DataLog {
         NSLog("Adding new SensorData at \(sensorData.time)")
         
         // Save your object
-        realm.beginWrite()
-        realm.add(sensorData)
-        try! realm.commitWrite()
+        try! DataLog.realm.write {
+            session.logs.append(sensorData)
+        }
     }
     
-    func csvData() -> NSData {
+    static func getSessions() -> Results<Session> {
+        return DataLog.realm.objects(Session)
+    }
+    
+    static func clear(session: Session) {
+        try! DataLog.realm.write {
+            DataLog.realm.delete(session)
+        }
+    }
+    
+    static func toCSV(session: Session) -> NSData {
         let header = [ SensorData.header() ]
-        let array = try! Realm().objects(SensorData).sorted("time")
-        let contents = array.map({$0.toString()})
+        let contents = session.logs
+            .sorted("time")
+            .map({$0.toString()})
         let data = (header + contents).joinWithSeparator("\n")
         return data.dataUsingEncoding(NSUTF8StringEncoding)!
     }
-    
-    func rows() -> Int {
-        return try! Realm().objects(SensorData).count
-    }
-    
-    func clear() {
-        try! realm.write {
-            realm.deleteAll()
-        }
-    }
+
 }

@@ -10,24 +10,28 @@ import Foundation
 import MessageUI
 
 class Exporter {
-    
-    static let sharedInsance = Exporter()
+    static let DEFAULT_RECIPIENT = "sven.mkw@gmail.com"
+    static let DEFAULT_SUBJECT = "iOSLog - Export"
+    static let sharedInstance = Exporter()
     var delegate: ViewController?
     
     init() {
         
     }
     
-    func export(sessionName: String) -> Bool {
-        // TODO: Why Wifi Alert?
+    func export() -> Bool {
+        // TODO: Wifi Alert
         
-        if sessionName.isEmpty {
-            self.showSessionAlert()
-        } else if MFMailComposeViewController.canSendMail() {
-            self.sendMail(sessionName)
+        if MFMailComposeViewController.canSendMail() {
+            self.sendMail()
             return true
         }
         return false
+    }
+    
+    func clear() {
+        NSLog("Deleting \(DataLog.getSessions().count) session objects.")
+        DataLog.getSessions().forEach { DataLog.clear($0) }
     }
     
     func showWifiAlert(then: ((Void) -> Void)? = nil) {
@@ -54,39 +58,36 @@ class Exporter {
         }
     }
     
-    func showSessionAlert(then: ((Void) -> Void)? = nil) {
-        let alert = UIAlertView(
-            title: "No Session Name",
-            message: "Fill in a session name.",
-            delegate: nil,
-            cancelButtonTitle: "OK")
-        alert.show()
-    }
-    
-    func sendMail(sessionName: String) {
-        NSLog("Sent \(DataLog.sharedInstance.rows()) rows of data")
-        
+    func sendMail() {
         let mailComposer = MFMailComposeViewController()
         mailComposer.mailComposeDelegate = self.delegate
+        mailComposer.setToRecipients([Exporter.DEFAULT_RECIPIENT])
+        mailComposer.setSubject(Exporter.DEFAULT_SUBJECT)
+        addAttachments(mailComposer)
         
-        // Get time
+        self.delegate!.presentViewController(mailComposer, animated: true, completion: nil)
+    }
+    
+    func addAttachments(mailComposer: MFMailComposeViewController) {
+        let sessions = DataLog.getSessions()
+        sessions.forEach { addAttachment(mailComposer, session: $0) }
+    }
+    
+    func addAttachment(mailComposer: MFMailComposeViewController, session: Session) {
+        // get time
         let date = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "dd/MM/yyyy@HH:mm"
         let dateString = formatter.stringFromDate(date)
         
-        // Set the subject of the email
-        let name = sessionName
-        mailComposer.setSubject("[\(dateString)] \(name) - Test drive")
+        let name = session.sessionName
         
-        // Time for filename
+        // time for filename
         let formatterForName = NSDateFormatter()
         formatterForName.dateFormat = "yyyyMMddHHmmss"
         let dateName = formatterForName.stringFromDate(date)
         
-        let data = DataLog.sharedInstance.csvData()
+        let data = DataLog.toCSV(session)
         mailComposer.addAttachmentData(data, mimeType: "text/csv", fileName: "\(dateName)-\(name)-ios.csv")
-        
-        self.delegate!.presentViewController(mailComposer, animated: true, completion: nil)
     }
 }
