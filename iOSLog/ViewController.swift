@@ -23,6 +23,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
         
         reset() 
         MotionLogger.sharedInstance.start()
+        Exporter.sharedInsance.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,7 +41,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     //
     
     func showWifiAlert(then: ((Void) -> Void)? = nil) {
-        if ReachabilityManager.hasConnectivity() {
+        if ReachabilityManager.hasConnectivity() {  
             let alert = UIAlertController(
                 title: "No Wifi",
                 message: "You have no Wifi connection. Really upload the data?",
@@ -114,10 +115,10 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     }
     
     @IBAction func exportData(sender: AnyObject) {
-        self.showWifiAlert() {
-            () -> Void in self.showSessionAlert() {
-                () -> Void in self.sendMail()
-            }
+        let success = Exporter.sharedInsance.export(sessionName.text!)
+        NSLog("Export ended with response: \(success)")
+        if success {
+            self.reset()
         }
     }
     

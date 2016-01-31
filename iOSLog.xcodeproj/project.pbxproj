@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26077BAD1C5E2C5B00FFF889 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26077BAC1C5E2C5B00FFF889 /* Exporter.swift */; };
 		26B6CEB91C34225C00B04C89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6CEB81C34225C00B04C89 /* AppDelegate.swift */; };
 		26B6CEBB1C34225C00B04C89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6CEBA1C34225C00B04C89 /* ViewController.swift */; };
 		26B6CEBE1C34225C00B04C89 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26B6CEBC1C34225C00B04C89 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26077BAC1C5E2C5B00FFF889 /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		26B6CEB51C34225C00B04C89 /* iOSLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26B6CEB81C34225C00B04C89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26B6CEBA1C34225C00B04C89 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				26E5B0641C344DD400BF7C7F /* SensorData.swift */,
 				26E5B0661C34529C00BF7C7F /* DataLog.swift */,
 				26EB12141C3AC74C00C099F8 /* ReachabilityManager.swift */,
+				26077BAC1C5E2C5B00FFF889 /* Exporter.swift */,
 			);
 			path = iOSLog;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			files = (
 				26EB12191C3AC99200C099F8 /* Reachability.swift in Sources */,
 				26B6CEBB1C34225C00B04C89 /* ViewController.swift in Sources */,
+				26077BAD1C5E2C5B00FFF889 /* Exporter.swift in Sources */,
 				26B6CEB91C34225C00B04C89 /* AppDelegate.swift in Sources */,
 				26E5B0671C34529C00BF7C7F /* DataLog.swift in Sources */,
 				26E5B0611C3424C800BF7C7F /* MotionLogger.swift in Sources */,
