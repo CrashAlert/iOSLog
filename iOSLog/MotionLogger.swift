@@ -109,6 +109,9 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
             return
         }
         
+        if #available(iOS 9.0, *) {
+            locationManager.allowsBackgroundLocationUpdates = true
+        }
         locationManager.startUpdatingLocation()
     }
     
@@ -219,7 +222,12 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     }
     
     func stopGPSLog() {
+        NSLog("Stop GPS")
+        
         locationManager.stopUpdatingLocation()
+        if #available(iOS 9.0, *) {
+            locationManager.allowsBackgroundLocationUpdates = false
+        }
     }
     
     func stopMagnetometerLog() {
