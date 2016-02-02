@@ -81,6 +81,8 @@ class CrashAlerterService {
         case .IDLE:
             switch event {
             case .SPEED_UPDATE(let speed):
+                NSLog("Speed Check in IDLE State")
+                
                 if exceedsCriticalSpeed(speed) {
                     return (.ACTIVE, nil)
                 }
@@ -141,30 +143,30 @@ class CrashAlerterService {
         
     }
     
-    // TODO: use ring buffers
-    var speed: Double = 0.0
-    var acceleration: Double = 0.0
+    let speed = RingBuffer(count: 100, repeatedValue: 0)
+    var acceleration = RingBuffer(count: 100, repeatedValue: 0)
     func updateMovement(speed: Double? = nil, acceleration: Double? = nil) {
         if let s = speed {
-            self.speed = s
+            self.speed.add(s)
         }
         
         if let acc = acceleration {
-            self.acceleration = acc
+            self.acceleration.add(acc)
         }
         
         checkMovement()
     }
     
     /*
-    * TODO: use ringbuffers & mean -> speed, max -> acc
-    * This method is only called when speed exeeds critial speed threshold.
-    */
+     * This method is only called when speed exeeds critial speed threshold.
+     */
     func checkMovement() {
         NSLog("Check Movement")
         
-        if speed < Threshold.CRITICAL_SPEED.rawValue - Threshold.SPEED_THRESHOLD.rawValue {
-            if acceleration > Threshold.CRITICAL_ACCELERATION.rawValue {
+        let speedMean = speed.reduce(0, combine: { return $0 + $1 }) / Double(speed.count)
+        if speedMean < Threshold.CRITICAL_SPEED.rawValue - Threshold.SPEED_THRESHOLD.rawValue {
+            let accMax = acceleration.values.maxElement()
+            if accMax > Threshold.CRITICAL_ACCELERATION.rawValue {
                 handleEvent(.ALARM_DETECTED)
                 return
             }
