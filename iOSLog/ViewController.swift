@@ -69,15 +69,16 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
         updateTime()
         lockSessionName()
         
-        logger = MotionLogger(sessionName: sessionName.text!)
-        logger?.start()
+        logger = MotionLogger(sessionName: sessionName.text!, withCrashAlerter: true) // always with crash alerter enabled
+        logger!.start()
     }
     
     /*
      * Stop tracking data and save session persistantly.
      */
     @IBAction func saveLogging(sender: AnyObject) {
-        logger?.stop()
+        NSLog("Save Logging")
+        logger!.stop()
         
         // update UI
         hideButton(discardButton)

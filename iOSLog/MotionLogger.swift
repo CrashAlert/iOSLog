@@ -11,39 +11,41 @@ import CoreLocation
 
 
 class MotionLogger: NSObject, CLLocationManagerDelegate  {
+    static let locationAccuracy = kCLLocationAccuracyBest
+    static let accUpdateInterval = 0.1
+    
     // == INSTANCE VARIABLES ==
     
     // Logger Instance
     let dataLog: DataLog
-    
-    // Motion Manager
-    let motionManager = CMMotionManager()
-    let gyroUpdateInterval = 0.1
-    let accUpdateInterval = 0.1
-    let magUpdateInterval = 0.1
-    
-    // Location Manager
-    let locationManager = CLLocationManager()
-    let locationAccuracy = kCLLocationAccuracyBest
+    let withCrashAlerter: Bool
     
     // Motion Activity Manager
     let activityManager = CMMotionActivityManager()
     
-    init(sessionName: String) {
-        dataLog = DataLog(sessionName: sessionName)
+    // Motion Manager
+    let motionManager: CMMotionManager! = {
+        let manager = CMMotionManager()
+        manager.accelerometerUpdateInterval = MotionLogger.accUpdateInterval
+        return manager
+    }()
+    
+    // Location Manager
+    let locationManager: CLLocationManager! = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = MotionLogger.locationAccuracy
+        manager.requestAlwaysAuthorization()
+        return manager
+    }()
+    
+    init(sessionName: String, withCrashAlerter: Bool = false) {
+        self.dataLog = DataLog(sessionName: sessionName)
+        self.withCrashAlerter = withCrashAlerter
         super.init()
-        
-        // configure motion manager
-        motionManager.gyroUpdateInterval = gyroUpdateInterval
-        motionManager.accelerometerUpdateInterval = accUpdateInterval
-        motionManager.magnetometerUpdateInterval = magUpdateInterval
-        
-        // configure location manager
-        locationManager.desiredAccuracy = locationAccuracy
-        locationManager.delegate = self
         
         // TODO: let user actively authorize on separate view
         // authorize
+        locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
     }
     
@@ -57,6 +59,11 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         self.startGPSLog()
         self.startMagnetometerLog()
         self.startMotionActivityLog()
+        
+        // start crash alerter service
+        if withCrashAlerter {
+            self.startCrashAlerter()
+        }
     }
     
     func startAccelerationLog() {
@@ -112,14 +119,6 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         }
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        for location in locations {
-            let sensorData = SensorData()
-            sensorData.setGPS(location)
-            dataLog.addSensorData(sensorData)
-        }
-    }
-    
     func startMagnetometerLog() {
         NSLog("Start Magnetometer Log")
         
@@ -151,6 +150,12 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         }
     }
     
+    func startCrashAlerter() {
+        NSLog("Start Crash Alerter")
+        
+        CrashAlerterService.sharedInstance.activate()
+    }
+    
     
     // == LOGGING ==
     
@@ -159,6 +164,14 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         sensorData.time = data.timestamp * 1e9
         sensorData.setAcceleration(data.acceleration)
         dataLog.addSensorData(sensorData)
+        
+        if withCrashAlerter {
+            let x2 = data.acceleration.x * data.acceleration.x
+            let y2 = data.acceleration.y * data.acceleration.y
+            let z2 = data.acceleration.z * data.acceleration.z
+            let accLength = sqrt(x2 + y2 + z2)
+            CrashAlerterService.sharedInstance.updateAccelerationIfNeeded(accLength)
+        }
     }
     
     func logGyroData(data: CMGyroData) {
@@ -180,6 +193,18 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         sensorData.time = data.timestamp * 1e9
         sensorData.setMotionActivity(data)
         dataLog.addSensorData(sensorData)
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        for location in locations {
+            let sensorData = SensorData()
+            sensorData.setGPS(location)
+            dataLog.addSensorData(sensorData)
+            
+            if withCrashAlerter {
+                CrashAlerterService.sharedInstance.updateSpeedIfNeeded(location.speed)
+            }
+        }
     }
     
     
@@ -211,5 +236,9 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         self.stopGPSLog()
         self.stopMagnetometerLog()
         self.stopMotionActivityLog()
+        
+        if withCrashAlerter {
+            CrashAlerterService.sharedInstance.deactivate()
+        }
     }
 }
