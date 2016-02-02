@@ -22,6 +22,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var sessionName: UITextField!
+    @IBOutlet weak var withCrashAlerter: UISwitch!
     @IBOutlet weak var unexportedLabel: UILabel!
     var logger: MotionLogger? = nil
     
@@ -69,7 +70,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
         updateTime()
         lockSessionName()
         
-        logger = MotionLogger(sessionName: sessionName.text!, withCrashAlerter: true) // always with crash alerter enabled
+        logger = MotionLogger(sessionName: sessionName.text!, withCrashAlerter: withCrashAlerter.on)
         logger!.start()
     }
     
@@ -219,10 +220,12 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     
     func lockSessionName() {
         sessionName.enabled = false
+        withCrashAlerter.enabled = false
     }
     
     func unlockSessionName() {
         sessionName.enabled = true
+        withCrashAlerter.enabled = true
         sessionName.text = ""
     }
     
