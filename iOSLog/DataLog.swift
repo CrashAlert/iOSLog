@@ -30,7 +30,7 @@ class DataLog {
     /*
      * Write SensorData into Buffer File
      */
-    func addSensorData(sensorData: SensorData) {
+    func addSensorData(_ sensorData: SensorData) {
         NSLog("Adding new SensorData at \(sensorData.time)")
         
         // Save your object
@@ -43,19 +43,19 @@ class DataLog {
         return DataLog.realm.objects(Session)
     }
     
-    static func clear(session: Session) {
+    static func clear(_ session: Session) {
         try! DataLog.realm.write {
             DataLog.realm.delete(session)
         }
     }
     
-    static func toCSV(session: Session) -> NSData {
+    static func toCSV(_ session: Session) -> Data {
         let header = [ SensorData.header() ]
         let contents = session.logs
             .sorted("time")
             .map({$0.toString()})
         let data = (header + contents).joinWithSeparator("\n")
-        return data.dataUsingEncoding(NSUTF8StringEncoding)!
+        return data.dataUsingEncoding(String.Encoding.utf8)!
     }
 
 }

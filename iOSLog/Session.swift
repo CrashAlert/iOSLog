@@ -17,7 +17,7 @@ import RealmSwift
  */
 class Session: Object {
     dynamic var sessionName = "iOS Log Session"
-    let id = NSUUID().UUIDString
+    let id = UUID().uuidString
     let logs = List<SensorData>()
     
     override static func indexedProperties() -> [String] {

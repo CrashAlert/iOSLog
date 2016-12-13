@@ -58,7 +58,7 @@ class SensorData: Object {
             "auto",
             "cycling",
             "unknown"
-            ].joinWithSeparator(",") + ","
+            ].joined(separator: ",") + ","
     }
 
     dynamic var time: Double = CACurrentMediaTime() * 1e9
@@ -92,29 +92,29 @@ class SensorData: Object {
     let cycling = RealmOptional<Bool>()
     let unknown = RealmOptional<Bool>()
     
-    func setNanoTime(t: Double) {
+    func setNanoTime(_ t: Double) {
         time = t
     }
     
-    func setAcceleration(acc: CMAcceleration) {
+    func setAcceleration(_ acc: CMAcceleration) {
         acc_x.value = acc.x * SensorData.gravity
         acc_y.value = acc.y * SensorData.gravity
         acc_z.value = acc.z * SensorData.gravity
     }
     
-    func setGyroscope(gyr: CMRotationRate) {
+    func setGyroscope(_ gyr: CMRotationRate) {
         gyr_x.value = gyr.x
         gyr_y.value = gyr.y
         gyr_z.value = gyr.z
     }
     
-    func setMagneticField(mag: CMMagneticField) {
+    func setMagneticField(_ mag: CMMagneticField) {
         mag_x.value = mag.x
         mag_y.value = mag.y
         mag_z.value = mag.z
     }
     
-    func setGPS(gps: CLLocation) {
+    func setGPS(_ gps: CLLocation) {
         lat.value = gps.coordinate.latitude
         lng.value = gps.coordinate.longitude
         bearing.value = gps.course
@@ -124,7 +124,7 @@ class SensorData: Object {
         err_lng.value = gps.verticalAccuracy
     }
     
-    func setMotionActivity(act: CMMotionActivity) {
+    func setMotionActivity(_ act: CMMotionActivity) {
         station.value = act.stationary
         run.value = act.running
         walk.value = act.walking
@@ -137,7 +137,7 @@ class SensorData: Object {
         return String(format: "%.0f", time)
     }
     
-    static func TripleToString(x: Double, y: Double, z: Double) -> String {
+    static func TripleToString(_ x: Double, y: Double, z: Double) -> String {
         let strX = String(format: "%.10f", x)
         let strY = String(format: "%.10f", y)
         let strZ = String(format: "%.10f", z)
@@ -246,6 +246,6 @@ class SensorData: Object {
             self.GPSToString(),
             self.pressureToString(),
             self.motionActivityToString()
-            ].joinWithSeparator(",")
+            ].joined(separator: ",")
     }
 }

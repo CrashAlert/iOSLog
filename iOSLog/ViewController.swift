@@ -43,7 +43,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
         // Dispose of any resources that can be recreated.
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         sessionName.resignFirstResponder()
     }
     
@@ -55,7 +55,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     /*
      * Start tracking data.
      */
-    @IBAction func startLogging(sender: AnyObject) {
+    @IBAction func startLogging(_ sender: AnyObject) {
         if (sessionName.text!.isEmpty || sessionExists()) {
             showSessionAlert()
             return
@@ -76,7 +76,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     /*
      * Stop tracking data and save session persistantly.
      */
-    @IBAction func saveLogging(sender: AnyObject) {
+    @IBAction func saveLogging(_ sender: AnyObject) {
         logger?.stop()
         
         // update UI
@@ -91,7 +91,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     /*
      * Stop Logging without saving changes. Show an alert box before.
      */
-    @IBAction func discardLogging(sender: AnyObject) {
+    @IBAction func discardLogging(_ sender: AnyObject) {
         let sessionName = self.sessionName.text!
         saveLogging(sender)
         
@@ -107,17 +107,17 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     // EXPORT
     //
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         // delete stored data only, when mail was successfully sent
-        if (result == MFMailComposeResultSent) {
+        if (result == MFMailComposeResult.sent) {
             Exporter.sharedInstance.clear()
             updateUnexportedLabel()
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func exportData(sender: AnyObject) {
+    @IBAction func exportData(_ sender: AnyObject) {
         let success = Exporter.sharedInstance.export()
         NSLog("Export ended with response: \(success)")
         if success {
@@ -130,25 +130,25 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     // ALERTS
     //
     
-    func showWifiAlert(then: ((Void) -> Void)? = nil) {
+    func showWifiAlert(_ then: ((Void) -> Void)? = nil) {
         if ReachabilityManager.hasConnectivity() {  
             let alert = UIAlertController(
                 title: "No Wifi",
                 message: "You have no Wifi connection. Really upload the data?",
-                preferredStyle: .Alert
+                preferredStyle: .alert
             )
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alert.addAction(cancelAction)
             
-            let confirmAction = UIAlertAction(title: "Continue", style: .Default) { (UIAlertAction) -> Void in
+            let confirmAction = UIAlertAction(title: "Continue", style: .default) { (UIAlertAction) -> Void in
                 if let callback = then {
                     callback()
                 }
             }
             alert.addAction(confirmAction)
             
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         } else if let callback = then {
             callback()
         }
@@ -170,10 +170,10 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     //
     
     func updateTime() {
-        let date = NSDate()
-        let formatter = NSDateFormatter()
+        let date = Date()
+        let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
-        let dateString = formatter.stringFromDate(date)
+        let dateString = formatter.string(from: date)
         time.text = dateString
     }
     
@@ -197,31 +197,31 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     //
     
     // http://stackoverflow.com/a/10022234/2729416
-    func hideButton(button: UIBarButtonItem) {
-        let index = toolbar.items?.indexOf(button)
-        toolbar.items?.removeAtIndex(index!)
+    func hideButton(_ button: UIBarButtonItem) {
+        let index = toolbar.items?.index(of: button)
+        toolbar.items?.remove(at: index!)
     }
     
-    func showButton(button: UIBarButtonItem) {
-        toolbar.items?.insert(button, atIndex: 1)
+    func showButton(_ button: UIBarButtonItem) {
+        toolbar.items?.insert(button, at: 1)
     }
     
     func showTime() {
-        timeLabel.hidden = false
-        time.hidden = false
+        timeLabel.isHidden = false
+        time.isHidden = false
     }
     
     func hideTime() {
-        timeLabel.hidden = true
-        time.hidden = true
+        timeLabel.isHidden = true
+        time.isHidden = true
     }
     
     func lockSessionName() {
-        sessionName.enabled = false
+        sessionName.isEnabled = false
     }
     
     func unlockSessionName() {
-        sessionName.enabled = true
+        sessionName.isEnabled = true
         sessionName.text = ""
     }
     
@@ -230,9 +230,9 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
         unexportedLabel.text = String(format: ViewController.unexportedLabelTemplate, logsCount)
         
         if (logsCount == 0) {
-            exportButton.enabled = false
+            exportButton.isEnabled = false
         } else {
-            exportButton.enabled = true
+            exportButton.isEnabled = true
         }
     }
     

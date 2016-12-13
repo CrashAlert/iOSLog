@@ -15,9 +15,9 @@ class ReachabilityManager {
             networkStatus = reachability.currentReachabilityStatus
         } catch {
             // no network on error
-            networkStatus = Reachability.NetworkStatus.NotReachable
+            networkStatus = Reachability.NetworkStatus.notReachable
         }
         
-        return networkStatus == Reachability.NetworkStatus.ReachableViaWiFi
+        return networkStatus == Reachability.NetworkStatus.reachableViaWiFi
     }
 }

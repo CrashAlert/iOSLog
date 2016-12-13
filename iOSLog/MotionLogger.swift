@@ -62,12 +62,12 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     func startAccelerationLog() {
         NSLog("Start Acceleration Logging")
         
-        if (!motionManager.accelerometerAvailable) {
+        if (!motionManager.isAccelerometerAvailable) {
             NSLog("Accelerometer not available!")
             return
         }
         
-        motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.currentQueue()!) {
+        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) {
             (accelerometerData: CMAccelerometerData?, NSError) -> Void in
             self.logAccelerationData(accelerometerData!)
             
@@ -80,12 +80,12 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     func startGyroLog() {
         NSLog("Start Gyro Logging")
         
-        if (!motionManager.gyroAvailable) {
+        if (!motionManager.isGyroAvailable) {
             NSLog("Gyro not available!")
             return
         }
         
-        motionManager.startGyroUpdatesToQueue(NSOperationQueue.currentQueue()!) {
+        motionManager.startGyroUpdates(to: OperationQueue.current!) {
             (gyroData: CMGyroData?, NSError) -> Void in
             self.logGyroData(gyroData!)
             if (NSError != nil) {
@@ -108,14 +108,14 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         locationManager.startUpdatingLocation()
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if (status == .AuthorizedAlways || status == .AuthorizedWhenInUse) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == .authorizedAlways || status == .authorizedWhenInUse) {
             // this only happens when location services were not enabled in startGPSLog before
             self.startGPSLog()
         }
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
             let sensorData = SensorData()
             sensorData.setGPS(location)
@@ -126,12 +126,12 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     func startMagnetometerLog() {
         NSLog("Start Magnetometer Log")
         
-        if (!motionManager.magnetometerAvailable) {
+        if (!motionManager.isMagnetometerAvailable) {
             NSLog("Magnetometer not available!")
             return
         }
         
-        motionManager.startMagnetometerUpdatesToQueue(NSOperationQueue.currentQueue()!) {
+        motionManager.startMagnetometerUpdates(to: OperationQueue.current!) {
             (magnetometerData: CMMagnetometerData?, NSError) -> Void in
             self.logMagnetometerData(magnetometerData!)
             if (NSError != nil) {
@@ -148,7 +148,7 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
             return
         }
         
-        activityManager.startActivityUpdatesToQueue(NSOperationQueue.currentQueue()!) {
+        activityManager.startActivityUpdates(to: OperationQueue.current!) {
             (activityData: CMMotionActivity?) -> Void in
             self.logMotionActivity(activityData!)
         }
@@ -157,28 +157,28 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     
     // == LOGGING ==
     
-    func logAccelerationData(data: CMAccelerometerData) {
+    func logAccelerationData(_ data: CMAccelerometerData) {
         let sensorData = SensorData()
         sensorData.time = data.timestamp * 1e9
         sensorData.setAcceleration(data.acceleration)
         dataLog.addSensorData(sensorData)
     }
     
-    func logGyroData(data: CMGyroData) {
+    func logGyroData(_ data: CMGyroData) {
         let sensorData = SensorData()
         sensorData.time = data.timestamp * 1e9
         sensorData.setGyroscope(data.rotationRate)
         dataLog.addSensorData(sensorData)
     }
     
-    func logMagnetometerData(data: CMMagnetometerData) {
+    func logMagnetometerData(_ data: CMMagnetometerData) {
         let sensorData = SensorData()
         sensorData.time = data.timestamp * 1e9
         sensorData.setMagneticField(data.magneticField)
         dataLog.addSensorData(sensorData)
     }
     
-    func logMotionActivity(data: CMMotionActivity) {
+    func logMotionActivity(_ data: CMMotionActivity) {
         let sensorData = SensorData()
         sensorData.time = data.timestamp * 1e9
         sensorData.setMotionActivity(data)
