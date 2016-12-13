@@ -11,12 +11,10 @@ import CoreLocation
 
 
 class MotionLogger: NSObject, CLLocationManagerDelegate  {
-    // == CLASS VARIABLES ==
-    
-    static let sharedInstance = MotionLogger()
-    
-    
     // == INSTANCE VARIABLES ==
+    
+    // Logger Instance
+    let dataLog: DataLog
     
     // Motion Manager
     let motionManager = CMMotionManager()
@@ -31,7 +29,8 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     // Motion Activity Manager
     let activityManager = CMMotionActivityManager()
     
-    override init() {
+    init(sessionName: String) {
+        dataLog = DataLog(sessionName: sessionName)
         super.init()
         
         // configure motion manager
@@ -42,9 +41,11 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
         // configure location manager
         locationManager.desiredAccuracy = locationAccuracy
         locationManager.delegate = self
+        
+        // TODO: let user actively authorize on separate view
+        // authorize
         locationManager.requestAlwaysAuthorization()
     }
-    
     
     // == STARTING ==
     
@@ -116,8 +117,9 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for location in locations {
-            let sensorData = SensorData(location: location)
-            DataLog.sharedInstance.addSensorData(sensorData)
+            let sensorData = SensorData()
+            sensorData.setGPS(location)
+            dataLog.addSensorData(sensorData)
         }
     }
     
@@ -156,23 +158,31 @@ class MotionLogger: NSObject, CLLocationManagerDelegate  {
     // == LOGGING ==
     
     func logAccelerationData(data: CMAccelerometerData) {
-        let sensorData = SensorData(timestamp: data.timestamp * 1e9, acceleration: data.acceleration)
-        DataLog.sharedInstance.addSensorData(sensorData)
+        let sensorData = SensorData()
+        sensorData.time = data.timestamp * 1e9
+        sensorData.setAcceleration(data.acceleration)
+        dataLog.addSensorData(sensorData)
     }
     
     func logGyroData(data: CMGyroData) {
-        let sensorData = SensorData(timestamp: data.timestamp * 1e9, rotationRate: data.rotationRate)
-        DataLog.sharedInstance.addSensorData(sensorData)
+        let sensorData = SensorData()
+        sensorData.time = data.timestamp * 1e9
+        sensorData.setGyroscope(data.rotationRate)
+        dataLog.addSensorData(sensorData)
     }
     
     func logMagnetometerData(data: CMMagnetometerData) {
-        let sensorData = SensorData(timestamp: data.timestamp * 1e9, magneticField: data.magneticField)
-        DataLog.sharedInstance.addSensorData(sensorData)
+        let sensorData = SensorData()
+        sensorData.time = data.timestamp * 1e9
+        sensorData.setMagneticField(data.magneticField)
+        dataLog.addSensorData(sensorData)
     }
     
     func logMotionActivity(data: CMMotionActivity) {
-        let sensorData = SensorData(timestamp: data.timestamp * 1e9, motionActivity: data)
-        DataLog.sharedInstance.addSensorData(sensorData)
+        let sensorData = SensorData()
+        sensorData.time = data.timestamp * 1e9
+        sensorData.setMotionActivity(data)
+        dataLog.addSensorData(sensorData)
     }
     
     
