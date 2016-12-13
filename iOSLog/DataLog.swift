@@ -52,10 +52,10 @@ class DataLog {
     static func toCSV(_ session: Session) -> Data {
         let header = [ SensorData.header() ]
         let contents = session.logs
-            .sorted("time")
+            .sorted(byProperty: "time")
             .map({$0.toString()})
-        let data = (header + contents).joinWithSeparator("\n")
-        return data.dataUsingEncoding(String.Encoding.utf8)!
+        let data = (header + contents).joined(separator: "\n")
+        return data.data(using: String.Encoding.utf8)!
     }
 
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1ED9618774A85C08AA8650ED /* Pods_iOSLogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A9BF3378BC4B1D33DF9CD3 /* Pods_iOSLogUITests.framework */; };
 		26077BAD1C5E2C5B00FFF889 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26077BAC1C5E2C5B00FFF889 /* Exporter.swift */; };
 		2645BD571C5E57AE008263DF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645BD561C5E57AE008263DF /* Session.swift */; };
 		26B6CEB91C34225C00B04C89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6CEB81C34225C00B04C89 /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 		26EB12171C3AC84400C099F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EB12161C3AC84400C099F8 /* SystemConfiguration.framework */; };
 		26EB12191C3AC99200C099F8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB12181C3AC99200C099F8 /* Reachability.swift */; };
 		E2DCFFFEF00150D9F2DC04A6 /* Pods_iOSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2639C9E59BA0713CA246BEC /* Pods_iOSLog.framework */; };
+		ECDA39190BA326BBD65F6C60 /* Pods_iOSLogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93BC641404B19C8D9BDE764 /* Pods_iOSLogTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22B0E268A81E55845C614234 /* Pods-iOSLogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSLogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSLogUITests/Pods-iOSLogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		26077BAC1C5E2C5B00FFF889 /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		2645BD561C5E57AE008263DF /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		26B6CEB51C34225C00B04C89 /* iOSLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,10 +72,15 @@
 		26EB12161C3AC84400C099F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		26EB12181C3AC99200C099F8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		530F0247DE545F897F6D3D12 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		62A9BF3378BC4B1D33DF9CD3 /* Pods_iOSLogUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSLogUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72C41A588938F67AD4B597A2 /* Pods-iOSLogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSLogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSLogTests/Pods-iOSLogTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7EC1B54A9728A72A2D5A4B33 /* Pods-iOSLogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSLogTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSLogTests/Pods-iOSLogTests.release.xcconfig"; sourceTree = "<group>"; };
 		819AD3C879FBFE39A8549808 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C2639C9E59BA0713CA246BEC /* Pods_iOSLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCC2512D9108BE234115C5F5 /* Pods-iOSLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSLog.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSLog/Pods-iOSLog.release.xcconfig"; sourceTree = "<group>"; };
 		D4ADEF4EE4B618D6FF491ADD /* Pods-iOSLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSLog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSLog/Pods-iOSLog.debug.xcconfig"; sourceTree = "<group>"; };
+		E93BC641404B19C8D9BDE764 /* Pods_iOSLogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSLogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F166342A91FC72C33B3CD53E /* Pods-iOSLogUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSLogUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSLogUITests/Pods-iOSLogUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECDA39190BA326BBD65F6C60 /* Pods_iOSLogTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED9618774A85C08AA8650ED /* Pods_iOSLogUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				C2639C9E59BA0713CA246BEC /* Pods_iOSLog.framework */,
+				E93BC641404B19C8D9BDE764 /* Pods_iOSLogTests.framework */,
+				62A9BF3378BC4B1D33DF9CD3 /* Pods_iOSLogUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -182,6 +194,10 @@
 				819AD3C879FBFE39A8549808 /* Pods.release.xcconfig */,
 				D4ADEF4EE4B618D6FF491ADD /* Pods-iOSLog.debug.xcconfig */,
 				CCC2512D9108BE234115C5F5 /* Pods-iOSLog.release.xcconfig */,
+				72C41A588938F67AD4B597A2 /* Pods-iOSLogTests.debug.xcconfig */,
+				7EC1B54A9728A72A2D5A4B33 /* Pods-iOSLogTests.release.xcconfig */,
+				22B0E268A81E55845C614234 /* Pods-iOSLogUITests.debug.xcconfig */,
+				F166342A91FC72C33B3CD53E /* Pods-iOSLogUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -193,12 +209,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26B6CEDD1C34225C00B04C89 /* Build configuration list for PBXNativeTarget "iOSLog" */;
 			buildPhases = (
-				53BE87CFED22EA2933FCF6D1 /* Check Pods Manifest.lock */,
+				53BE87CFED22EA2933FCF6D1 /* [CP] Check Pods Manifest.lock */,
 				26B6CEB11C34225C00B04C89 /* Sources */,
 				26B6CEB21C34225C00B04C89 /* Frameworks */,
 				26B6CEB31C34225C00B04C89 /* Resources */,
-				3C9A8BB04911018D4A51BCED /* Embed Pods Frameworks */,
-				DE1E44B000B27B6ADFD1E38A /* Copy Pods Resources */,
+				3C9A8BB04911018D4A51BCED /* [CP] Embed Pods Frameworks */,
+				DE1E44B000B27B6ADFD1E38A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,9 +229,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26B6CEE01C34225C00B04C89 /* Build configuration list for PBXNativeTarget "iOSLogTests" */;
 			buildPhases = (
+				B7C3892ECE7DAC24DD94EB80 /* [CP] Check Pods Manifest.lock */,
 				26B6CEC51C34225C00B04C89 /* Sources */,
 				26B6CEC61C34225C00B04C89 /* Frameworks */,
 				26B6CEC71C34225C00B04C89 /* Resources */,
+				CA76AC07883CE0856A565B37 /* [CP] Embed Pods Frameworks */,
+				766CDBB9A35EA1D1B4EA3B42 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,9 +250,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26B6CEE31C34225C00B04C89 /* Build configuration list for PBXNativeTarget "iOSLogUITests" */;
 			buildPhases = (
+				48E8C48B112FC94541551D5C /* [CP] Check Pods Manifest.lock */,
 				26B6CED01C34225C00B04C89 /* Sources */,
 				26B6CED11C34225C00B04C89 /* Frameworks */,
 				26B6CED21C34225C00B04C89 /* Resources */,
+				FA7B0C72462E35856003C485 /* [CP] Embed Pods Frameworks */,
+				29D0371F47BC0909B19D6357 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,12 +274,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Sven Mischkewitz";
 				TargetAttributes = {
 					26B6CEB41C34225C00B04C89 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 7JUN85HZJS;
+						DevelopmentTeam = 6632V3GLNN;
 						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -325,14 +347,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3C9A8BB04911018D4A51BCED /* Embed Pods Frameworks */ = {
+		29D0371F47BC0909B19D6357 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSLogUITests/Pods-iOSLogUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3C9A8BB04911018D4A51BCED /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,34 +377,109 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSLog/Pods-iOSLog-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		53BE87CFED22EA2933FCF6D1 /* Check Pods Manifest.lock */ = {
+		48E8C48B112FC94541551D5C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		DE1E44B000B27B6ADFD1E38A /* Copy Pods Resources */ = {
+		53BE87CFED22EA2933FCF6D1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		766CDBB9A35EA1D1B4EA3B42 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSLogTests/Pods-iOSLogTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B7C3892ECE7DAC24DD94EB80 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CA76AC07883CE0856A565B37 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSLogTests/Pods-iOSLogTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DE1E44B000B27B6ADFD1E38A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSLog/Pods-iOSLog-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA7B0C72462E35856003C485 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOSLogUITests/Pods-iOSLogUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -453,8 +565,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -477,7 +591,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -498,8 +612,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -516,9 +632,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -527,12 +644,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D4ADEF4EE4B618D6FF491ADD /* Pods-iOSLog.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
+				DEVELOPMENT_TEAM = 6632V3GLNN;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = iOSLog/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mkw.iOSLog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -545,12 +664,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CCC2512D9108BE234115C5F5 /* Pods-iOSLog.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)";
+				DEVELOPMENT_TEAM = 6632V3GLNN;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = iOSLog/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mkw.iOSLog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -561,6 +682,7 @@
 		};
 		26B6CEE11C34225C00B04C89 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72C41A588938F67AD4B597A2 /* Pods-iOSLogTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = iOSLogTests/Info.plist;
@@ -574,6 +696,7 @@
 		};
 		26B6CEE21C34225C00B04C89 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7EC1B54A9728A72A2D5A4B33 /* Pods-iOSLogTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = iOSLogTests/Info.plist;
@@ -587,6 +710,7 @@
 		};
 		26B6CEE41C34225C00B04C89 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22B0E268A81E55845C614234 /* Pods-iOSLogUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = iOSLogUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -600,6 +724,7 @@
 		};
 		26B6CEE51C34225C00B04C89 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F166342A91FC72C33B3CD53E /* Pods-iOSLogUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = iOSLogUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

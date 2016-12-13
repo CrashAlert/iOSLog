@@ -40,7 +40,7 @@ public enum ReachabilityError: Error {
 public let ReachabilityChangedNotification = "ReachabilityChangedNotification"
 
 func callback(_ reachability:SCNetworkReachability, flags: SCNetworkReachabilityFlags, info: UnsafeMutableRawPointer) {
-    let reachability = Unmanaged<Reachability>.fromOpaque(OpaquePointer(info)).takeUnretainedValue()
+    let reachability = Unmanaged<Reachability>.fromOpaque(_: info).takeUnretainedValue()
 
     DispatchQueue.main.async {
         reachability.reachabilityChanged(flags)

@@ -202,7 +202,7 @@ class SensorData: Object {
                 altitude,
                 horizontal,
                 vertical
-                ].joinWithSeparator(",")
+                ].joined(separator: ",")
         } else {
             return ",,,,,,"
         }
@@ -229,7 +229,7 @@ class SensorData: Object {
                 automotive,
                 cycling,
                 unknown
-                ].joinWithSeparator(",")
+                ].joined(separator: ",")
         } else {
             return ",,,,,"
         }
