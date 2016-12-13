@@ -6,6 +6,7 @@ workspace 'iOSLog'
 target 'iOSLog' do
     pod 'Charts'
     pod 'RealmSwift'
+    pod 'ReachabilitySwift', '~> 3'
 end
 
 target 'iOSLogTests' do

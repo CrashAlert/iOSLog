@@ -5,19 +5,12 @@
 //  Created by Sven Mischkewitz on 04/01/16.
 //  Copyright © 2016 Sven Mischkewitz. All rights reserved.
 //
-
+import ReachabilitySwift
 
 class ReachabilityManager {
+    static let reachability = Reachability()!
+    
     class func hasConnectivity() -> Bool {
-        let networkStatus: Reachability.NetworkStatus
-        do {
-            let reachability: Reachability = try Reachability.reachabilityForLocalWiFi()
-            networkStatus = reachability.currentReachabilityStatus
-        } catch {
-            // no network on error
-            networkStatus = Reachability.NetworkStatus.notReachable
-        }
-        
-        return networkStatus == Reachability.NetworkStatus.reachableViaWiFi
+        return reachability.isReachableViaWiFi
     }
 }

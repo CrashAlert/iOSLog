@@ -24,6 +24,8 @@
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Let us log your location data :)</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Let us log yout motion data ;)</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

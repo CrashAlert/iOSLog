@@ -24,7 +24,6 @@
 		26E5B0691C3457B200BF7C7F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E5B0681C3457B200BF7C7F /* CoreLocation.framework */; };
 		26EB12151C3AC74C00C099F8 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB12141C3AC74C00C099F8 /* ReachabilityManager.swift */; };
 		26EB12171C3AC84400C099F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26EB12161C3AC84400C099F8 /* SystemConfiguration.framework */; };
-		26EB12191C3AC99200C099F8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB12181C3AC99200C099F8 /* Reachability.swift */; };
 		E2DCFFFEF00150D9F2DC04A6 /* Pods_iOSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2639C9E59BA0713CA246BEC /* Pods_iOSLog.framework */; };
 		ECDA39190BA326BBD65F6C60 /* Pods_iOSLogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93BC641404B19C8D9BDE764 /* Pods_iOSLogTests.framework */; };
 /* End PBXBuildFile section */
@@ -70,7 +69,6 @@
 		26E5B0681C3457B200BF7C7F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		26EB12141C3AC74C00C099F8 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		26EB12161C3AC84400C099F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		26EB12181C3AC99200C099F8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		530F0247DE545F897F6D3D12 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		62A9BF3378BC4B1D33DF9CD3 /* Pods_iOSLogUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSLogUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		72C41A588938F67AD4B597A2 /* Pods-iOSLogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSLogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSLogTests/Pods-iOSLogTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 		26B6CEB71C34225C00B04C89 /* iOSLog */ = {
 			isa = PBXGroup;
 			children = (
-				26EB12181C3AC99200C099F8 /* Reachability.swift */,
 				26E5B0601C3424C800BF7C7F /* MotionLogger.swift */,
 				26B6CEB81C34225C00B04C89 /* AppDelegate.swift */,
 				26B6CEBA1C34225C00B04C89 /* ViewController.swift */,
@@ -489,7 +486,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26EB12191C3AC99200C099F8 /* Reachability.swift in Sources */,
 				26B6CEBB1C34225C00B04C89 /* ViewController.swift in Sources */,
 				26077BAD1C5E2C5B00FFF889 /* Exporter.swift in Sources */,
 				26B6CEB91C34225C00B04C89 /* AppDelegate.swift in Sources */,
@@ -651,7 +647,7 @@
 				DEVELOPMENT_TEAM = 6632V3GLNN;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = iOSLog/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mkw.iOSLog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -671,7 +667,7 @@
 				DEVELOPMENT_TEAM = 6632V3GLNN;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = iOSLog/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mkw.iOSLog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
