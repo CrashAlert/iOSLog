@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 import Foundation
-
+import PromiseKit
 
 class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UIDocumentInteractionControllerDelegate {
     static let unexportedLabelTemplate = "You currently have %d unexported logs."
@@ -118,16 +118,12 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     }
     
     @IBAction func exportData(_ sender: AnyObject) {
-        
-//        let success = MailExporter.sharedInstance.export()
-        let success = S3Exporter.sharedInstance.export()
-        
-        NSLog("Export ended with response: \(success)")
-        if success {
+        S3Exporter.sharedInstance.export().tap {_ in 
             self.reset()
+            self.updateUnexportedLabel()
+            self.updateTime()
         }
     }
-
     
     //
     // ALERTS
@@ -182,8 +178,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     
     func resetData() {
         updateTime()
-        // TODO: clear realm
-//        DataLog.realm.clear()
+        DataLog.getSessions().forEach(DataLog.clear)
     }
     
     @IBAction func reset() {
