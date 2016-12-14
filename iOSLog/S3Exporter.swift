@@ -43,15 +43,19 @@ class S3Exporter {
         let data = DataLog.toCSV(session)
         
         let awstask = transferUtility.uploadData(data, bucket: s3BucketName, key: name, contentType: "text/csv", expression: nil, completionHander: nil)
-
-        awstask.continue({ task -> Void in
-            if (task.error != nil) {
-                NSLog("S3 upload failed")
+        
+        awstask.continue({ (task) -> AnyObject! in
+            if let error = task.error {
+                print("Error: \(error.localizedDescription)")
             }
-            if (task.result != nil) {
-                NSLog("S3 upload was successful")
-                DataLog.clear(session)
+            if let exception = task.exception {
+                print("Exception: \(exception.description)")
             }
+            if let result = task.result {
+                print("Upload Starting: \(result.description)")
+            }
+            
+            return nil;
         })
     }
 }
