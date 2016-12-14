@@ -33,6 +33,7 @@ class S3Exporter {
     
     func export() -> Bool {
         let sessions = DataLog.getSessions()
+        print(sessions.count)
         sessions.forEach(upload)
         return false
     }
@@ -52,9 +53,21 @@ class S3Exporter {
                 print("Exception: \(exception.description)")
             }
             if let result = task.result {
-                print("Upload Starting: \(result.description)")
+                print("Result: \(result.description)")
             }
             
+            if task.isCompleted {
+                print("Upload Completed")
+            }
+
+            if task.isCancelled {
+                print("Upload Cancelled")
+            }
+
+            if task.isFaulted {
+                print("Upload Faulted")
+            }
+
             return nil;
         })
     }
