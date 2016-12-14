@@ -10,7 +10,7 @@ import Foundation
 import MessageUI
 
 class Exporter {
-    static let DEFAULT_RECIPIENT = "sven.mkw@gmail.com"
+    static let DEFAULT_RECIPIENT = "ringnico@web.de"
     static let DEFAULT_SUBJECT = "iOSLog - Export"
     static let sharedInstance = Exporter()
     var delegate: ViewController?
