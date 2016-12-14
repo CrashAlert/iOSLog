@@ -35,7 +35,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
         updateUnexportedLabel()
         
         reset()
-        Exporter.sharedInstance.delegate = self
+        MailExporter.sharedInstance.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,7 +110,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         // delete stored data only, when mail was successfully sent
         if (result == MFMailComposeResult.sent) {
-            Exporter.sharedInstance.clear()
+            MailExporter.sharedInstance.clear()
             updateUnexportedLabel()
         }
         
@@ -118,7 +118,10 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     }
     
     @IBAction func exportData(_ sender: AnyObject) {
-        let success = Exporter.sharedInstance.export()
+        
+//        let success = MailExporter.sharedInstance.export()
+        let success = S3Exporter.sharedInstance.export()
+        
         NSLog("Export ended with response: \(success)")
         if success {
             self.reset()
@@ -180,7 +183,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate, UID
     func resetData() {
         updateTime()
         // TODO: clear realm
-        //DataLog.sharedInstance.clear()
+//        DataLog.realm.clear()
     }
     
     @IBAction func reset() {

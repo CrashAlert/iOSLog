@@ -11,6 +11,7 @@ class ReachabilityManager {
     static let reachability = Reachability()!
     
     class func hasConnectivity() -> Bool {
+        NSLog("Is reachable via WIFI \(reachability.isReachableViaWiFi)")
         return reachability.isReachableViaWiFi
     }
 }

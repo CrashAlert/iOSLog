@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03CC75BD1E016702008F07E5 /* S3Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC75BC1E016702008F07E5 /* S3Exporter.swift */; };
 		1ED9618774A85C08AA8650ED /* Pods_iOSLogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A9BF3378BC4B1D33DF9CD3 /* Pods_iOSLogUITests.framework */; };
-		26077BAD1C5E2C5B00FFF889 /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26077BAC1C5E2C5B00FFF889 /* Exporter.swift */; };
+		26077BAD1C5E2C5B00FFF889 /* MailExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26077BAC1C5E2C5B00FFF889 /* MailExporter.swift */; };
 		2645BD571C5E57AE008263DF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645BD561C5E57AE008263DF /* Session.swift */; };
 		26B6CEB91C34225C00B04C89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6CEB81C34225C00B04C89 /* AppDelegate.swift */; };
 		26B6CEBB1C34225C00B04C89 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B6CEBA1C34225C00B04C89 /* ViewController.swift */; };
@@ -46,8 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03CC75BC1E016702008F07E5 /* S3Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = S3Exporter.swift; sourceTree = "<group>"; };
 		22B0E268A81E55845C614234 /* Pods-iOSLogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSLogUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSLogUITests/Pods-iOSLogUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		26077BAC1C5E2C5B00FFF889 /* Exporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
+		26077BAC1C5E2C5B00FFF889 /* MailExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailExporter.swift; sourceTree = "<group>"; };
 		2645BD561C5E57AE008263DF /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		26B6CEB51C34225C00B04C89 /* iOSLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26B6CEB81C34225C00B04C89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,8 +152,9 @@
 				26E5B0641C344DD400BF7C7F /* SensorData.swift */,
 				26E5B0661C34529C00BF7C7F /* DataLog.swift */,
 				26EB12141C3AC74C00C099F8 /* ReachabilityManager.swift */,
-				26077BAC1C5E2C5B00FFF889 /* Exporter.swift */,
+				26077BAC1C5E2C5B00FFF889 /* MailExporter.swift */,
 				2645BD561C5E57AE008263DF /* Session.swift */,
+				03CC75BC1E016702008F07E5 /* S3Exporter.swift */,
 			);
 			path = iOSLog;
 			sourceTree = "<group>";
@@ -487,10 +490,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				26B6CEBB1C34225C00B04C89 /* ViewController.swift in Sources */,
-				26077BAD1C5E2C5B00FFF889 /* Exporter.swift in Sources */,
+				26077BAD1C5E2C5B00FFF889 /* MailExporter.swift in Sources */,
 				26B6CEB91C34225C00B04C89 /* AppDelegate.swift in Sources */,
 				26E5B0671C34529C00BF7C7F /* DataLog.swift in Sources */,
 				26E5B0611C3424C800BF7C7F /* MotionLogger.swift in Sources */,
+				03CC75BD1E016702008F07E5 /* S3Exporter.swift in Sources */,
 				26EB12151C3AC74C00C099F8 /* ReachabilityManager.swift in Sources */,
 				26E5B0651C344DD400BF7C7F /* SensorData.swift in Sources */,
 				2645BD571C5E57AE008263DF /* Session.swift in Sources */,
@@ -640,7 +644,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D4ADEF4EE4B618D6FF491ADD /* Pods-iOSLog.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -660,7 +664,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CCC2512D9108BE234115C5F5 /* Pods-iOSLog.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

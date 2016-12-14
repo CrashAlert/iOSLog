@@ -7,6 +7,7 @@ target 'iOSLog' do
     pod 'Charts'
     pod 'RealmSwift'
     pod 'ReachabilitySwift', '~> 3'
+    pod 'AWSS3', '~> 2.3.3'
 end
 
 target 'iOSLogTests' do

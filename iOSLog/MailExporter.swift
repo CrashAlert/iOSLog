@@ -9,10 +9,10 @@
 import Foundation
 import MessageUI
 
-class Exporter {
+class MailExporter {
     static let DEFAULT_RECIPIENT = "ringnico@web.de"
     static let DEFAULT_SUBJECT = "iOSLog - Export"
-    static let sharedInstance = Exporter()
+    static let sharedInstance = MailExporter()
     var delegate: ViewController?
     
     init() {
@@ -61,8 +61,8 @@ class Exporter {
     func sendMail() {
         let mailComposer = MFMailComposeViewController()
         mailComposer.mailComposeDelegate = self.delegate
-        mailComposer.setToRecipients([Exporter.DEFAULT_RECIPIENT])
-        mailComposer.setSubject(Exporter.DEFAULT_SUBJECT)
+        mailComposer.setToRecipients([MailExporter.DEFAULT_RECIPIENT])
+        mailComposer.setSubject(MailExporter.DEFAULT_SUBJECT)
         addAttachments(mailComposer)
         
         self.delegate!.present(mailComposer, animated: true, completion: nil)
